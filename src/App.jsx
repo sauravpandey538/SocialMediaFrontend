@@ -73,7 +73,7 @@ function App() {
         w={"400px"}
         overflowX={"scroll"}
       >
-        <Heading size={"lg"} color={"gray.700"}>
+        <Heading fontSize={"25px"} fontWeight={700} color={"gray.700"}>
           Stories
         </Heading>
         <Story />
