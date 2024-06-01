@@ -51,8 +51,8 @@ function Suggestions() {
       flexDirection={"column"}
       overflowX={"scroll"}
     >
-      {api.map((data) => (
-        <Flex justifyContent={"left"} gap={3} alignItems={"end"}>
+      {api.map((data, index) => (
+        <Flex justifyContent={"left"} gap={3} alignItems={"end"} key={index}>
           <Avatar name="Prosper Otemuyiwa" src={data.image_url} />
           <Text w={"200px"}>{data.email}</Text>
           <Button bg={"black"} color={"white"} borderRadius={"20px"}>

@@ -1,14 +1,7 @@
 import React from "react";
-import { Image } from "@chakra-ui/react";
-function SmallProfileImage() {
-  return (
-    <Image
-      borderRadius="full"
-      boxSize="50px"
-      src="https://bit.ly/dan-abramov"
-      alt="Profile Image"
-    />
-  );
+import { Image, Avatar } from "@chakra-ui/react";
+function SmallProfileImage({ pp, username }) {
+  return <Avatar borderRadius="full" boxSize="50px" src={pp} alt={username} />;
 }
 
 export default SmallProfileImage;

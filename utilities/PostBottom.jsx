@@ -12,8 +12,12 @@ function PostBottom() {
   ];
   return (
     <Flex gap={"6px"} justifyContent={"left"}>
-      {api.map((data) => (
-        <Button leftIcon={<data.name size={"25px"} />} variant={"ghost"}>
+      {api.map((data, index) => (
+        <Button
+          leftIcon={<data.name size={"25px"} />}
+          variant={"ghost"}
+          key={index}
+        >
           {data.data}
         </Button>
       ))}

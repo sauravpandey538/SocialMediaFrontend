@@ -23,14 +23,15 @@ function Story() {
       {/* story
         suggestions
         friends */}
-      <Flex overflowX={"scroll"} gap={2} w={"400px"} bg={"white"}>
+      <Flex gap={2} bg={"white"} overflow={"scroll"}>
         {api.map((data, index) => (
-          <Box minW={"60%"}>
+          <Box w={"250px"} key={index}>
             <Image
               h={"2xs"}
               objectFit="cover"
               src={data.image}
               borderRadius={"10px"}
+              filter="brightness(50%)"
             />
             <Text
               fontWeight={700}
