@@ -21,7 +21,7 @@ function NavItem() {
     <Flex direction="column" gap="2">
       {nav.map((item, index) => (
         <motion.div whileHover={{ scale: 1.1 }} key={index}>
-          <Link to={`/${item.name.toLowerCase()}`}>
+          <Link to={item.name === "Home" ? "/" : `/${item.name.toLowerCase()}`}>
             <Button
               leftIcon={<item.icon />}
               variant={"link"}

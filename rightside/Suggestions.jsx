@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Flex, Button, Avatar, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 function Suggestions() {
   const [api, setApi] = useState([]);
@@ -22,7 +23,6 @@ function Suggestions() {
 
     postData();
   }, []);
-  // console.log(api);
   return (
     <Box
       w={"100%"}
@@ -33,8 +33,14 @@ function Suggestions() {
     >
       {api?.map((data, index) => (
         <Flex justifyContent={"left"} gap={3} alignItems={"end"} key={index}>
-          <Avatar name={data.email} src={data.profileImage} />
-          <Text w={"200px"}>{data.email}</Text>
+          {" "}
+          {/*id of user */}
+          <Link to={`/profile/${data._id}`}>
+            <Avatar name={data.email} src={data.profileImage} />{" "}
+          </Link>
+          <Text w={"200px"} h={"auto"} minW={"100px"}>
+            <Link to={`/profile/${data._id}`}>{data.email}</Link>
+          </Text>
           <Button bg={"black"} color={"white"} borderRadius={"20px"}>
             Follow{" "}
             {/*this will be upgraded later knowing already folloing or not */}
