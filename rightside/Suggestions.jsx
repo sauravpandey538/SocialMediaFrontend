@@ -22,11 +22,10 @@ function Suggestions() {
 
     postData();
   }, []);
-  console.log(api);
+  // console.log(api);
   return (
     <Box
       w={"100%"}
-      //   border={"2px solid black"}
       display={"flex"}
       gap={4}
       flexDirection={"column"}

@@ -23,7 +23,7 @@ function Story() {
 
     postData();
   }, []);
-  console.log(api);
+  // console.log(api);
   return (
     <Card>
       {/* story

@@ -7,7 +7,7 @@ import { IoMdMail } from "react-icons/io";
 import { MdNotificationAdd } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
 import { FaUserFriends } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
 function NavItem() {
   const nav = [
     { icon: IoIosHome, name: "Home" },
@@ -21,15 +21,16 @@ function NavItem() {
     <Flex direction="column" gap="2">
       {nav.map((item, index) => (
         <motion.div whileHover={{ scale: 1.1 }} key={index}>
-          <Button
-            leftIcon={<item.icon />}
-            variant={"link"}
-            color={"black"}
-            // fontSize={"20px"}
-            my={"10px"}
-          >
-            {item.name}
-          </Button>
+          <Link to={`/${item.name.toLowerCase()}`}>
+            <Button
+              leftIcon={<item.icon />}
+              variant={"link"}
+              color={"black"}
+              my={"10px"}
+            >
+              {item.name}
+            </Button>
+          </Link>
         </motion.div>
       ))}
     </Flex>

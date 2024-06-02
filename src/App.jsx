@@ -8,8 +8,15 @@ import Postmodel from "../models/post.model";
 import MiddleNav from "../middleside/MiddleNav";
 import Upload from "../middleside/upload";
 import axios from "axios";
+import { useBreakpointValue } from "@chakra-ui/react";
 function App() {
   const [user, setUser] = useState({});
+  const device = useBreakpointValue({
+    base: "iphone",
+    md: "ipad",
+    lg: "macbook",
+  });
+  console.log(device);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -19,9 +26,9 @@ function App() {
             withCredentials: true,
           }
         );
-        console.log(userResponse);
+        // console.log(userResponse);
         setUser(userResponse.data.user);
-        console.log(user);
+        // console.log(user);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -36,52 +43,64 @@ function App() {
       maxW={"100vw"}
     >
       {/* left side */}
-      <Card
-        className="left"
-        w={"300px"}
-        bg={"white"}
-        px={"20px"}
-        display={"flex"}
-        direction={"column"}
-        alignItems={"left"}
-        h={"100vh"}
-        gap={4}
-        py={"10px"}
-      >
-        <ProfileImageName
-          pp={user.profileImage}
-          cp={user.coverImage}
-          email={user.email}
-          bio={user.bio}
-        />
-        <NavItem />
-      </Card>
+      {device === "macbook" && (
+        <Card
+          className="left"
+          maxW={"300px"}
+          bg={"white"}
+          px={"20px"}
+          display={"flex"}
+          direction={"column"}
+          alignItems={"left"}
+          h={"100vh"}
+          gap={4}
+          py={"10px"}
+        >
+          <ProfileImageName
+            pp={user.profileImage}
+            cp={user.coverImage}
+            email={user.email}
+            bio={user.bio}
+          />
+          <NavItem />
+        </Card>
+      )}
+
       {/* middle side */}
-      <Card w={"52vw"} overflowY={"scroll"} maxH={"100vh"} px={"20px"}>
-        <MiddleNav />
+      <Card
+        flex={2}
+        overflowY={"scroll"}
+        maxH={"100vh"}
+        px={"20px"}
+        minW={"xs"}
+        border={"2px solid black"}
+      >
+        <MiddleNav device={device} />
         <Upload pp={user.profileImage} username={user.email} />
         <Postmodel />
       </Card>
       {/* right side */}
-      <Card
-        display={"flex"}
-        direction={"column"}
-        alignItems={"left"}
-        p={"10px"}
-        gap={4}
-        h={"100vh"}
-        w={"400px"}
-        overflowX={"scroll"}
-      >
-        <Heading fontSize={"25px"} fontWeight={700} color={"gray.700"}>
-          Stories
-        </Heading>
-        <Story />
-        <Text fontSize={"25px"} fontWeight={700} color={"gray.700"}>
-          Suggestions{" "}
-        </Text>{" "}
-        <Suggestions />
-      </Card>
+      {(device === "macbook" || device === "ipad") && (
+        <Card
+          display={"flex"}
+          direction={"column"}
+          alignItems={"left"}
+          p={"10px"}
+          gap={4}
+          h={"100vh"}
+          w={"400px"}
+          overflowX={"scroll"}
+        >
+          <Heading fontSize={"25px"} fontWeight={700} color={"gray.700"}>
+            Stories
+          </Heading>
+          <Story />
+          <Text fontSize={"25px"} fontWeight={700} color={"gray.700"}>
+            Suggestions{" "}
+          </Text>{" "}
+          <Suggestions />
+        </Card>
+      )}
     </Flex>
   );
 }
