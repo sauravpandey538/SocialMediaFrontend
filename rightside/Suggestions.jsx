@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Box, Flex, Button, Avatar, Text } from "@chakra-ui/react";
+import { MdGroupAdd } from "react-icons/md";
+import { UserContext } from "../context/userContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import CustomizedButton from "../utilities/Button";
 function Suggestions() {
   const [api, setApi] = useState([]);
   const [count, setCount] = useState(10);
+  const { user } = useContext(UserContext);
+
   useEffect(() => {
     const postData = async () => {
       try {
@@ -22,7 +27,22 @@ function Suggestions() {
     };
 
     postData();
-  }, []);
+  }, [user]);
+  const handleFollow = async (userId) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/${userId}/follow`,
+        {},
+
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   return (
     <Box
       w={"100%"}
@@ -41,10 +61,9 @@ function Suggestions() {
           <Text w={"200px"} h={"auto"} minW={"100px"}>
             <Link to={`/profile/${data._id}`}>{data.email}</Link>
           </Text>
-          <Button bg={"black"} color={"white"} borderRadius={"20px"}>
-            Follow{" "}
-            {/*this will be upgraded later knowing already folloing or not */}
-          </Button>
+          <Box onClick={() => handleFollow(data._id)}>
+            <CustomizedButton text="Follow" icon={<MdGroupAdd />} />
+          </Box>
         </Flex>
       ))}
     </Box>

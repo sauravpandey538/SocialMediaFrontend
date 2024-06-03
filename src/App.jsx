@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Card, Flex, Text, Image, Heading } from "@chakra-ui/react";
 import NavItem from "../leftside/NavItem";
 import ProfileImageName from "../leftside/ProfileImageName";
@@ -12,18 +12,18 @@ import { useBreakpointValue } from "@chakra-ui/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "../Signup.jsx";
 import Login from "../Login.jsx";
-import Logout from "../Logout.jsx";
+// import Logout from "../Logout.jsx";
 import ReactDOM from "react-dom/client";
 import Profile from "../middleside/Profile";
+import { UserContext } from "../context/userContext";
 
 function App() {
-  const [user, setUser] = useState({});
+  const { user, updateUser } = useContext(UserContext);
   const device = useBreakpointValue({
     base: "iphone",
     md: "ipad",
     lg: "macbook",
   });
-  // console.log(device);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -34,14 +34,13 @@ function App() {
           }
         );
         // console.log(userResponse);
-        setUser(userResponse.data.user);
-        // console.log(user);
+        updateUser(userResponse.data.user);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
     fetchUserData();
-  }, []);
+  }, [user]);
   return (
     <Router>
       <Flex
@@ -55,6 +54,7 @@ function App() {
           <Card
             className="left"
             maxW={"300px"}
+            minW={"200px"}
             bg={"white"}
             px={"20px"}
             display={"flex"}
@@ -96,8 +96,6 @@ function App() {
           />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/notification" element={<Logout />} /> {/*trial phase*/}
           <Route path="/profile/:userId" element={<Profile />} />
         </Routes>
 

@@ -1,10 +1,13 @@
 // status : working fine
 import React, { useState } from "react";
-import { Flex, Card, Input, Button, ButtonGroup } from "@chakra-ui/react";
+import { Flex, Card, Input, Button, ButtonGroup, Box } from "@chakra-ui/react";
 import { BsFillImageFill } from "react-icons/bs";
 import { BiWorld } from "react-icons/bi";
 import axios from "axios";
 import SmallProfileImage from "../utilities/SmallProfileImage";
+import { MdOutlineCloudUpload } from "react-icons/md";
+import { FaHistory } from "react-icons/fa";
+import CustomizedButton from "../utilities/Button";
 
 function Upload({ pp, username }) {
   const [post, setPost] = useState({
@@ -35,7 +38,7 @@ function Upload({ pp, username }) {
         }
       );
       console.log(response);
-      console.log("success");
+      window.location.reload(); // this is unfair and will be removed later
     } catch (error) {
       console.log("error", error);
     }
@@ -66,22 +69,10 @@ function Upload({ pp, username }) {
           />
         </label>
         <ButtonGroup>
-          <Button
-            bg={"black"}
-            color={"white"}
-            borderRadius={"20px"}
-            //   onClick={handleUpload}
-          >
-            Story
-          </Button>
-          <Button
-            bg={"black"}
-            color={"white"}
-            borderRadius={"20px"}
-            onClick={handleUpload}
-          >
-            Upload
-          </Button>
+          <CustomizedButton text="Story" icon={<FaHistory />} />
+          <Box onClick={handleUpload}>
+            <CustomizedButton text="Upload" icon={<MdOutlineCloudUpload />} />
+          </Box>
         </ButtonGroup>
       </Flex>
     </Card>

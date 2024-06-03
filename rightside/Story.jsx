@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Card, Image, Flex, Text, Box, Avatar } from "@chakra-ui/react";
 import axios from "axios";
-
+import { UserContext } from "../context/userContext";
 function Story() {
   const [api, setApi] = useState([]);
   const [count, setCount] = useState(5);
+  const { user, updateUser } = useContext(UserContext);
+
   useEffect(() => {
     const postData = async () => {
       try {
@@ -22,7 +24,7 @@ function Story() {
     };
 
     postData();
-  }, []);
+  }, [user]);
   // console.log(api);
   return (
     <Card>

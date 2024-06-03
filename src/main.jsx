@@ -3,17 +3,15 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import fonttheme from "../theme/font.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Signup from "../Signup.jsx";
-import Login from "../Login.jsx";
-import Logout from "../Logout.jsx";
+
+import { UserProvider } from "../context/userContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider theme={fonttheme}>
-      {/* <App /> */}
-      {/* <Signup /> */}
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </ChakraProvider>
   </React.StrictMode>
 );

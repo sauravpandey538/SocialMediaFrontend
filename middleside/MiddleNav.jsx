@@ -1,13 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Box, Flex, Button, ButtonGroup, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { VscThreeBars } from "react-icons/vsc";
 import { motion } from "framer-motion";
 import { MdCancel } from "react-icons/md";
-
+import { MdLogout } from "react-icons/md";
+import axios from "axios";
 import NavItem from "../leftside/NavItem";
+import { UserContext } from "../context/userContext";
+import CustomizedButton from "../utilities/Button";
+import { IoEnterOutline } from "react-icons/io5";
+import { IoCreateOutline } from "react-icons/io5";
+
 function MiddleNav({ device }) {
   const [open, setOpen] = useState(false);
+  const { user } = useContext(UserContext);
+  const handleApiLogout = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/logout",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Flex
       justifyContent={"space-between"}
@@ -63,19 +84,22 @@ function MiddleNav({ device }) {
           </Text>
         </motion.div>
       )}
+      {/*working*/}
       <Flex>
-        <ButtonGroup>
-          <Link to="/login">
-            <Button bg={"black"} color={"white"} borderRadius={"20px"}>
-              Login
-            </Button>
+        {Object.keys(user).length !== 0 ? (
+          <Link onClick={handleApiLogout}>
+            <CustomizedButton text="Logout" icon={<MdLogout />} />
           </Link>
-          <Link to="/signup">
-            <Button bg={"black"} color={"white"} borderRadius={"20px"}>
-              Signup
-            </Button>
-          </Link>
-        </ButtonGroup>
+        ) : (
+          <ButtonGroup>
+            <Link to="/login">
+              <CustomizedButton text="Login" icon={<IoEnterOutline />} />
+            </Link>
+            <Link to="/signup">
+              <CustomizedButton text="Signup" icon={<IoCreateOutline />} />
+            </Link>
+          </ButtonGroup>
+        )}
       </Flex>
     </Flex>
   );
