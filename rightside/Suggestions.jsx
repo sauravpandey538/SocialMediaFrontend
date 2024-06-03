@@ -7,7 +7,7 @@ import axios from "axios";
 import CustomizedButton from "../utilities/Button";
 function Suggestions() {
   const [api, setApi] = useState([]);
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(5);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
