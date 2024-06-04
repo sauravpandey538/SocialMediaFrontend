@@ -36,7 +36,7 @@ function Login() {
       justifyContent={"center"}
       alignItems={"center"}
       color={"gray.600"}
-      w={"90%"}
+      // w={"fit-content"}
       h={"100vh"}
       // border={"2px solid black"}
       // boxShadow={"lg"}

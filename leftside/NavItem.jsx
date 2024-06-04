@@ -8,12 +8,15 @@ import { MdNotificationAdd } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
 import { FaUserFriends } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { IoPersonCircleSharp } from "react-icons/io5";
+
 function NavItem() {
   const nav = [
     { icon: IoIosHome, name: "Home" },
     { icon: IoMdMail, name: "Message" },
     { icon: MdNotificationAdd, name: "Notification" },
     { icon: FaUserFriends, name: "Friends" },
+    { icon: IoPersonCircleSharp, name: "Profile" },
     { icon: IoSettings, name: "Setting" },
   ];
 

@@ -31,7 +31,6 @@ function Signup() {
       justifyContent={"center"}
       alignItems={"center"}
       color={"gray.600"}
-      w={"90%"}
       h={"100vh"}
       // border={"2px solid black"}
       // boxShadow={"lg"}

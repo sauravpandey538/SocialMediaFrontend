@@ -85,7 +85,7 @@ function App() {
                 maxH={"100vh"}
                 px={"20px"}
                 minW={"sm"}
-                border={"2px solid black"}
+                // border={"2px solid black"}
                 overflowX={"hidden"}
               >
                 <MiddleNav device={device} />
