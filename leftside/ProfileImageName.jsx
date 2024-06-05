@@ -1,8 +1,9 @@
 import React from "react";
 import { Box, Image, Flex, Text } from "@chakra-ui/react";
-import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
+import { Avatar } from "@chakra-ui/react";
 import CoverPicture from "../update/CoverPicture";
-function ProfileImageName({ pp, cp, bio, email }) {
+import ProfilePicture from "../update/ProfilePicture";
+function ProfileImageName({ pp, cp, bio, email, hideIcon }) {
   return (
     <Flex direction={"column"}>
       <Box className="ProfileImageName">
@@ -22,6 +23,7 @@ function ProfileImageName({ pp, cp, bio, email }) {
             bgColor={"black"}
             color={"white"}
             borderRadius={"50%"}
+            display={hideIcon && "none"}
             // fontSize={"10px"}
           >
             <CoverPicture />
@@ -43,10 +45,11 @@ function ProfileImageName({ pp, cp, bio, email }) {
             bgColor={"black"}
             color={"white"}
             borderRadius={"50%"}
+            display={hideIcon && "none"}
 
             // fontSize={"10px"}
           >
-            <ProfileImageName />{" "}
+            <ProfilePicture />{" "}
           </Box>
         </Box>
       </Box>
@@ -54,7 +57,9 @@ function ProfileImageName({ pp, cp, bio, email }) {
         <Text fontSize={"20px"} fontWeight={700} color={"gray.700"}>
           {email}
         </Text>
-        <Text>{bio}</Text>
+        <Text color={"gray.600"} py={"5px"}>
+          {bio}
+        </Text>
       </Box>
     </Flex>
   );

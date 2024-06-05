@@ -7,14 +7,14 @@ import PostBottom from "../utilities/PostBottom";
 import axios from "axios";
 
 function Postmodel() {
-  const [api, setApi] = useState(null);
+  const [posts, setPosts] = useState([]);
   useEffect(() => {
     const postData = async () => {
       try {
         const response = await axios.get("http://localhost:3000/posts", {
           withCredentials: true,
         });
-        setApi(response.data.post);
+        setPosts(response.data.posts);
       } catch (error) {
         console.error("Error:", error);
         // Handle error
@@ -25,7 +25,7 @@ function Postmodel() {
   }, []);
   return (
     <div>
-      {api?.map((post, index) => (
+      {posts?.map((post, index) => (
         <Card
           key={index}
           borderRadius={"15px"}
@@ -46,11 +46,11 @@ function Postmodel() {
             <Avatar
               borderRadius="full"
               boxSize="50px"
-              src={post.uploaderPP}
-              alt={post.email}
+              src={post.uploader.profileImage}
+              alt={post.uploader.email}
             />{" "}
             <Flex direction={"column"} ml="10px">
-              <Text fontWeight="bold">{post.uploader}</Text>
+              <Text fontWeight="bold">{post.uploader.email}</Text>
               <Text fontSize="sm" color="gray.500">
                 {formatDistanceToNow(new Date(post.customTimestamp), {
                   addSuffix: true,
@@ -94,40 +94,3 @@ function Postmodel() {
 }
 
 export default Postmodel;
-
-// const posts = [
-//   {
-//     uploader: "Alice Johnson",
-//     uploadedAt: "2024-05-30T10:15:30Z",
-//     caption: "A beautiful day in the park!",
-//     imageUrl: "https://wallpapercave.com/wp/wp7637601.jpg",
-//   },
-//   {
-//     uploader: "Bob Smith",
-//     uploadedAt: "2024-05-29T08:45:00Z",
-//     caption: "Enjoying a delicious meal!",
-//     imageUrl:
-//       "https://w0.peakpx.com/wallpaper/83/682/HD-wallpaper-happy-be-happy-boys-positive.jpg",
-//   },
-//   {
-//     uploader: "Charlie Brown",
-//     uploadedAt: "2024-05-28T14:20:10Z",
-//     caption: "Just finished a great workout!",
-//     imageUrl:
-//       "https://i.pinimg.com/originals/54/02/c5/5402c54f69d0c02d9f01e7a5c667e4b0.jpg",
-//   },
-//   {
-//     uploader: "Diana Prince",
-//     uploadedAt: "2024-05-27T18:30:45Z",
-//     caption: "Had an amazing time at the concert!",
-//     imageUrl:
-//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQEWe4SCQokx8-EaIiR-9ac3DItfyuJFcmHw&s",
-//   },
-//   {
-//     uploader: "Eve Adams",
-//     uploadedAt: "2024-05-26T11:00:00Z",
-//     caption: "Sunset by the beach.",
-//     imageUrl:
-//       "https://www.desktopbackground.org/download/o/2013/10/09/651750_wallpapers-for-boys_1280x1024_h.jpg",
-//   },
-// ];

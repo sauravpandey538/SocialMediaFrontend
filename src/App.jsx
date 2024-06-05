@@ -14,8 +14,9 @@ import Signup from "../Signup.jsx";
 import Login from "../Login.jsx";
 // import Logout from "../Logout.jsx";
 import ReactDOM from "react-dom/client";
-import Profile from "../middleside/Profile";
+// import Profile from "../middleside/Profile";
 import { UserContext } from "../context/userContext";
+import Profile from "../from_Nav/Profile";
 
 function App() {
   const { user, updateUser } = useContext(UserContext);
@@ -41,6 +42,7 @@ function App() {
     };
     fetchUserData();
   }, [user]);
+  // console.log(user.profileImage);
   return (
     <Router>
       <Flex
@@ -73,7 +75,6 @@ function App() {
             <NavItem />
           </Card>
         )}
-
         {/* middle side */}
         <Routes>
           <Route
@@ -98,7 +99,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/profile/:userId" element={<Profile />} />
         </Routes>
-
         {/* right side */}
         {(device === "macbook" || device === "ipad") && (
           <Card
@@ -108,7 +108,8 @@ function App() {
             p={"10px"}
             gap={4}
             h={"100vh"}
-            w={"400px"}
+            maxW={"350px"}
+            minW={"250px"}
             overflowX={"scroll"}
           >
             <Heading fontSize={"25px"} fontWeight={700} color={"gray.700"}>
