@@ -7,7 +7,7 @@ import axios from "axios";
 import CustomizedButton from "../utilities/Button";
 function Suggestions() {
   const [api, setApi] = useState([]);
-  const [count, setCount] = useState(5);
+  const [count, setCount] = useState(15);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ function Suggestions() {
       display={"flex"}
       gap={4}
       flexDirection={"column"}
-      overflowX={"scroll"}
+      overflowY={"scroll"}
     >
       {api?.map((data, index) => (
         <Flex justifyContent={"left"} gap={3} alignItems={"end"} key={index}>

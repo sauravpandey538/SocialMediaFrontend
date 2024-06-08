@@ -17,6 +17,7 @@ import ReactDOM from "react-dom/client";
 // import Profile from "../middleside/Profile";
 import { UserContext } from "../context/userContext";
 import Profile from "../from_Nav/Profile";
+import Friends from "../from_Nav/Friends";
 
 function App() {
   const { user, updateUser } = useContext(UserContext);
@@ -41,7 +42,7 @@ function App() {
       }
     };
     fetchUserData();
-  }, [user]);
+  }, [user, updateUser]);
   // console.log(user.profileImage);
   return (
     <Router>
@@ -98,6 +99,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile/:userId" element={<Profile />} />
+          <Route path="/:userId/friends" element={<Friends />} />
         </Routes>
         {/* right side */}
         {(device === "macbook" || device === "ipad") && (
@@ -110,16 +112,15 @@ function App() {
             h={"100vh"}
             maxW={"350px"}
             minW={"250px"}
-            overflowX={"scroll"}
           >
             <Heading fontSize={"25px"} fontWeight={700} color={"gray.700"}>
               Stories
             </Heading>
-            <Story />
+            {Object.keys(user) !== 0 && <Story />}
             <Text fontSize={"25px"} fontWeight={700} color={"gray.700"}>
               Suggestions{" "}
             </Text>{" "}
-            <Suggestions />
+            {Object.keys(user).length !== 0 && <Suggestions />}
           </Card>
         )}
       </Flex>

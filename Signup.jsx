@@ -32,8 +32,8 @@ function Signup() {
       alignItems={"center"}
       color={"gray.600"}
       h={"100vh"}
+      w={"100%"}
       // border={"2px solid black"}
-      // boxShadow={"lg"}
     >
       <Card maxW={"lg"} gap={3} p={"50px"} boxShadow={"lg"}>
         <Flex className="inputOne" direction={"column"} gap={1}>

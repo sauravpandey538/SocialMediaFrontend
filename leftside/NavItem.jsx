@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { motion } from "framer-motion";
 
 import { Button, Text, Box, Flex } from "@chakra-ui/react";
@@ -9,8 +9,9 @@ import { IoSettings } from "react-icons/io5";
 import { FaUserFriends } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { IoPersonCircleSharp } from "react-icons/io5";
-
+import { UserContext } from "../context/userContext";
 function NavItem() {
+  const { user } = useContext(UserContext);
   const nav = [
     { icon: IoIosHome, name: "Home" },
     { icon: IoMdMail, name: "Message" },
@@ -19,12 +20,23 @@ function NavItem() {
     { icon: IoPersonCircleSharp, name: "Profile" },
     { icon: IoSettings, name: "Setting" },
   ];
-
+  console.log(user);
   return (
-    <Flex direction="column" gap="2">
+    <Flex direction="column" gap="2" overflowY={"scroll"} overflowX={"hidden"}>
       {nav.map((item, index) => (
         <motion.div whileHover={{ scale: 1.1 }} key={index}>
-          <Link to={item.name === "Home" ? "/" : `/${item.name.toLowerCase()}`}>
+          <Link
+            to={
+              item.name === "Home"
+                ? "/"
+                : item.name === "Profile"
+                ? `/profile/${user._id}`
+                : item.name === "Friends"
+                ? `/${user._id}/friends`
+                : `/${item.name.toLowerCase()}`
+            }
+            // <Link to={`/profile/${data._id}`}>{data.email}</Link>
+          >
             <Button
               leftIcon={<item.icon />}
               variant={"link"}

@@ -36,10 +36,8 @@ function Login() {
       justifyContent={"center"}
       alignItems={"center"}
       color={"gray.600"}
-      // w={"fit-content"}
       h={"100vh"}
-      // border={"2px solid black"}
-      // boxShadow={"lg"}
+      w={"100%"}
     >
       <Card maxW={"lg"} gap={3} p={"50px"} boxShadow={"lg"}>
         <Flex className="inputOne" direction={"column"} gap={1}>

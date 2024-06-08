@@ -5,7 +5,7 @@ import { Box, Text, Card, Button, Flex, Avatar, Image } from "@chakra-ui/react";
 import ProfileImageName from "../leftside/ProfileImageName";
 import { formatDistanceToNow } from "date-fns";
 import PostBottom from "../utilities/PostBottom";
-
+import { Link } from "react-router-dom";
 function Profile() {
   const { userId } = useParams();
   const [user, setUser] = useState({});
@@ -53,7 +53,9 @@ function Profile() {
         <Flex gap={6} fontSize={"20px"}>
           <Text>{postCount} posts </Text>
           <Text>{user.followCount} followers </Text>
-          <Text>{user.followingCount} following </Text>
+          <Link to={`/${user._id}/friends`}>
+            <Text>{user.followingCount} following </Text>
+          </Link>
         </Flex>
         <Button>{isFollowing ? "Following" : "Follow"}</Button>
       </Flex>
