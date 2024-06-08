@@ -2,27 +2,21 @@ import React, { useState, useEffect } from "react";
 import { Image, Box, Flex, Button, Card, Input } from "@chakra-ui/react";
 import EditIcon from "../utilities/EditIcon";
 import axios from "axios";
-import CustomizedButton from "../utilities/Button";
-import { MdOutlineCloudUpload } from "react-icons/md";
 
-function Bio() {
-  const [bio, setBio] = useState("");
-  const [loadingUpload, setLoadingUpload] = useState(null);
+function Email() {
+  const [email, setEmail] = useState("");
 
   const handleUpdate = async () => {
     try {
-      setLoadingUpload(true);
       const response = await axios.post(
         "http://localhost:3000/bio",
-        { bio },
+        { email },
         {
           withCredentials: true,
         }
       );
-      setLoadingUpload(false);
       console.log("Bio updated:", response.data);
     } catch (error) {
-      setLoadingUpload(false);
       console.error("Error updating bio:", error);
     }
   };
@@ -30,19 +24,13 @@ function Bio() {
     <Box>
       <EditIcon
         children={
-          <Card display={"flex"} flexDirection={"column"} gap={3}>
+          <Card display={"flex"} flexDirection={"column"}>
             <Input
-              placeholder="enter your news bio"
+              placeholder="enter your new email"
               value={bio}
               onChange={(e) => setBio(e.target.value)}
             />
-            <Box onClick={handleUpdate} minW={"100px"} px={"50px"}>
-              <CustomizedButton
-                text="Update"
-                icon={<MdOutlineCloudUpload />}
-                loading={loadingUpload}
-              />
-            </Box>
+            <Button onClick={handleUpdate}>Update</Button>
           </Card>
         }
       />
@@ -50,4 +38,5 @@ function Bio() {
   );
 }
 
-export default Bio;
+export default Email;
+// not working at this moment

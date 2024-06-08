@@ -3,6 +3,8 @@ import axios from "axios";
 import { MdGroupAdd } from "react-icons/md";
 import CustomizedButton from "../utilities/Button";
 import { UserContext } from "../context/userContext";
+import { MdPersonRemoveAlt1 } from "react-icons/md";
+
 import { Box, Text, Flex, Avatar, Card } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 function Friends({ userId }) {
@@ -64,7 +66,8 @@ function Friends({ userId }) {
             </Link>
           </Text>
           <Box>
-            <CustomizedButton text="Followings" icon={<MdGroupAdd />} />
+            <CustomizedButton text="Remove" icon={<MdPersonRemoveAlt1 />} />{" "}
+            {/* same for all, must be edited later*/}
           </Box>
         </Flex>
       ))}

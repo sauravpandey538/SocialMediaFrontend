@@ -20,7 +20,6 @@ function NavItem() {
     { icon: IoPersonCircleSharp, name: "Profile" },
     { icon: IoSettings, name: "Setting" },
   ];
-  console.log(user);
   return (
     <Flex direction="column" gap="2" overflowY={"scroll"} overflowX={"hidden"}>
       {nav.map((item, index) => (
