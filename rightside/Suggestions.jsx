@@ -5,6 +5,7 @@ import { UserContext } from "../context/userContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import CustomizedButton from "../utilities/Button";
+import { FollowButton } from "../utilities/Follow";
 function Suggestions() {
   const [api, setApi] = useState([]);
   const [count, setCount] = useState(15);
@@ -28,21 +29,6 @@ function Suggestions() {
 
     postData();
   }, [user]);
-  const handleFollow = async (userId) => {
-    try {
-      const response = await axios.post(
-        `http://localhost:3000/${userId}/follow`,
-        {},
-
-        {
-          withCredentials: true,
-        }
-      );
-      console.log(response);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
   return (
     <Box
       w={"100%"}
@@ -61,9 +47,7 @@ function Suggestions() {
           <Text w={"200px"} h={"auto"} minW={"100px"}>
             <Link to={`/profile/${data._id}`}>{data.email}</Link>
           </Text>
-          <Box onClick={() => handleFollow(data._id)}>
-            <CustomizedButton text="Follow" icon={<MdGroupAdd />} />
-          </Box>
+          <FollowButton userId={data._id} />
         </Flex>
       ))}
     </Box>

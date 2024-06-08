@@ -7,11 +7,26 @@ import { MdPersonRemoveAlt1 } from "react-icons/md";
 
 import { Box, Text, Flex, Avatar, Card } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
+import { Unfollow } from "../utilities/Follow";
 function Friends({ userId }) {
   //   const { user } = useContext(UserContext);
   const id = useParams().userId;
   const [api, setApi] = useState([]);
-
+  const handleRemove = async (userId) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3000/suggestion/${userId}/delete`,
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // handleRemove is overwriting here and i can't even remove cause it will affect useeffect.
+  // todo: fit this later
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -27,7 +42,7 @@ function Friends({ userId }) {
       }
     };
     fetch();
-  }, []);
+  }, [handleRemove]);
 
   return (
     <Card
@@ -65,10 +80,7 @@ function Friends({ userId }) {
               {data.following.email}
             </Link>
           </Text>
-          <Box>
-            <CustomizedButton text="Remove" icon={<MdPersonRemoveAlt1 />} />{" "}
-            {/* same for all, must be edited later*/}
-          </Box>
+          <Unfollow userID={data.following._id} />
         </Flex>
       ))}
     </Card>
