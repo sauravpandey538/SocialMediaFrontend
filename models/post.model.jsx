@@ -25,9 +25,9 @@ function Postmodel() {
   }, []);
   return (
     <div>
-      {posts?.map((post, index) => (
+      {posts?.map((post) => (
         <Card
-          key={index}
+          key={post._id}
           borderRadius={"15px"}
           display={"flex"}
           flexDirection={"column"}
@@ -85,7 +85,12 @@ function Postmodel() {
             mt="10px"
           >
             {/* Add your like/comment buttons here */}
-            <PostBottom />
+            {/* <PostBottom
+              accountReached={post.accountReached}
+              likeCount={post.likeCount}
+              commentCount={post.commentCount}
+            /> */}
+            <PostBottom postId={post._id} />
           </Flex>
         </Card>
       ))}

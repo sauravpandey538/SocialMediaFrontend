@@ -36,15 +36,16 @@ function App() {
             withCredentials: true,
           }
         );
-        // console.log(userResponse);
+        console.log(userResponse);
         updateUser(userResponse.data.user);
+        console.log(userResponse);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
     fetchUserData();
-  }, [user, updateUser]);
-  // console.log(user.profileImage);
+  }, [updateUser]);
+  console.log(user);
   return (
     <Router>
       <Flex
