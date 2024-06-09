@@ -21,7 +21,7 @@ function NavItem() {
     { icon: IoSettings, name: "Setting" },
   ];
   return (
-    <Flex direction="column" gap="2" overflowY={"scroll"} overflowX={"hidden"}>
+    <Flex direction="column" gap="2" maxH={"fit-content"}>
       {nav.map((item, index) => (
         <motion.div whileHover={{ scale: 1.1 }} key={index}>
           <Link

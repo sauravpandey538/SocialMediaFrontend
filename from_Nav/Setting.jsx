@@ -1,24 +1,32 @@
 import React from "react";
-import { Box, Text, Card, Avatar, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Card,
+  Avatar,
+  Button,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import EditIcon from "../utilities/EditIcon";
 import ProfilePicture from "../update/ProfilePicture";
 import Bio from "../update/Bio";
 import CoverPicture from "../update/CoverPicture";
 import Password from "../update/Password";
+import MiddleNav from "../middleside/MiddleNav";
 import {
   DeleteButtonForAccount,
   DeleteButtonForPost,
 } from "../utilities/DeleteButton";
 function Setting() {
+  const device = useBreakpointValue({
+    base: "iphone",
+    md: "ipad",
+    lg: "macbook",
+  });
   return (
-    <Card
-      h={"100vh"}
-      w={"100vw"}
-      display={"flex"}
-      alignItems={"center"}
-      justifyContent={"center"}
-      p={"30px"}
-    >
+    <Card h={"100vh"} w={"100vw"} display={"flex"} p={"30px"}>
+      {(device === "iphone" || device === "ipad") && <MiddleNav />}
+
       <Box display={"flex"} flexDirection={"column"} gap={3} w={"100%"}>
         <Text fontSize={"25px"} fontWeight={700} color={"gray.700"}>
           Settings{" "}

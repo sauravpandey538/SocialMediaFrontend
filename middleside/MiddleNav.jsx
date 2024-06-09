@@ -53,7 +53,7 @@ function MiddleNav({ device }) {
         <motion.div
           style={{
             position: "fixed",
-            top: "70px",
+            top: "40px",
             left: 0,
             backgroundColor: "white",
             width: "250px",
