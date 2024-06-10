@@ -1,40 +1,71 @@
-// looks like error in time and fetching order.
 import React, { useState, useEffect } from "react";
-import { Button, Text, Box, Card, Flex, Image, Avatar } from "@chakra-ui/react";
-import SmallProfileImage from "../utilities/SmallProfileImage";
+import { Text, Box, Card, Flex, Image, Avatar } from "@chakra-ui/react";
 import { formatDistanceToNow } from "date-fns";
 import PostBottom from "../utilities/PostBottom";
 import axios from "axios";
 
 function Postmodel() {
   const [posts, setPosts] = useState([]);
+  const [count, setCount] = useState(3);
+
   useEffect(() => {
     const postData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/posts", {
-          withCredentials: true,
-        });
-        setPosts(response.data.posts);
+        const response = await axios.get(
+          `http://localhost:3000/posts/${count}`,
+          {
+            withCredentials: true,
+          }
+        );
+        console.log(count);
+        setPosts((prev) => [...prev, ...response.data.posts]); // all data is being fetched
+        // setPosts(response.data.posts); // limited (2) data is being fetched which is as planned
       } catch (error) {
         console.error("Error:", error);
-        // Handle error
       }
     };
 
     postData();
+  }, [count]);
+
+  const handleInfiniteScroll = () => {
+    try {
+      if (
+        window.innerHeight + document.documentElement.scrollTop + 1 >=
+        document.documentElement.scrollHeight // innerHeight and scrollHeight is always same..(error)
+      ) {
+        // console.log("innerHeight : ", window.innerHeight);
+        // console.log("ScrollTop : ", document.documentElement.scrollTop); // output : 0;
+        // console.log("scrollHeight : ", document.documentElement.scrollHeight);
+
+        setCount(count + 3);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    console.log("Adding scroll event listener", window.addEventListener);
+    document.addEventListener("scroll", handleInfiniteScroll, true);
+    return () => {
+      console.log("Removing scroll event listener");
+      document.removeEventListener("scroll", handleInfiniteScroll, true);
+    };
   }, []);
+
   return (
     <div>
-      {posts?.map((post) => (
+      {posts.map((post, index) => (
         <Card
-          key={post._id}
+          key={index}
           borderRadius={"15px"}
           display={"flex"}
           flexDirection={"column"}
           bgSize="cover"
           bgPosition="center"
           my="20px"
-          p={"10px"}
+          p={"20px"}
         >
           {/* 1st row */}
           <Flex
@@ -48,7 +79,7 @@ function Postmodel() {
               boxSize="50px"
               src={post.uploader.profileImage}
               alt={post.uploader.email}
-            />{" "}
+            />
             <Flex direction={"column"} ml="10px">
               <Text fontWeight="bold">{post.uploader.email}</Text>
               <Text fontSize="sm" color="gray.500">
@@ -84,12 +115,6 @@ function Postmodel() {
             justifyContent="space-between"
             mt="10px"
           >
-            {/* Add your like/comment buttons here */}
-            {/* <PostBottom
-              accountReached={post.accountReached}
-              likeCount={post.likeCount}
-              commentCount={post.commentCount}
-            /> */}
             <PostBottom postId={post._id} />
           </Flex>
         </Card>

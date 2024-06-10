@@ -45,7 +45,7 @@ function App() {
     };
     fetchUserData();
   }, [updateUser]);
-  console.log(user);
+  // console.log(user);
   return (
     <Router>
       <Flex
@@ -87,8 +87,7 @@ function App() {
                 flex={2}
                 overflowY={"scroll"}
                 maxH={"100vh"}
-                px={"20px"}
-                minW={"sm"}
+                // minW={"sm"}
                 // border={"2px solid black"}
                 overflowX={"hidden"}
               >

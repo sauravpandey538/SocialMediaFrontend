@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { Box, Flex, Button, Avatar, Text } from "@chakra-ui/react";
 import { MdGroupAdd } from "react-icons/md";
 import { UserContext } from "../context/userContext";
@@ -8,8 +8,12 @@ import CustomizedButton from "../utilities/Button";
 import { FollowButton } from "../utilities/Follow";
 function Suggestions() {
   const [api, setApi] = useState([]);
-  const [count, setCount] = useState(15);
+  const [count, setCount] = useState(5);
   const { user } = useContext(UserContext);
+
+  const handleFetchMore = useCallback(() => {
+    setCount((prev) => prev + 5);
+  }, [count]);
 
   useEffect(() => {
     const postData = async () => {
@@ -28,14 +32,15 @@ function Suggestions() {
     };
 
     postData();
-  }, [user]);
+  }, [user, handleFetchMore]);
+
   return (
     <Box
       w={"100%"}
       display={"flex"}
       gap={4}
       flexDirection={"column"}
-      overflowY={"scroll"}
+      overflowY={"auto"}
     >
       {api?.map((data, index) => (
         <Flex justifyContent={"left"} gap={3} alignItems={"end"} key={index}>
@@ -50,6 +55,9 @@ function Suggestions() {
           <FollowButton userId={data._id} />
         </Flex>
       ))}
+      <Text onClick={handleFetchMore} cursor={"pointer"}>
+        See more
+      </Text>
     </Box>
   );
 }

@@ -34,12 +34,13 @@ function MiddleNav({ device }) {
       justifyContent={"space-between"}
       borderBottom={"1px solid gray"}
       py={"10px"}
+      px={"10px"} //added
       position={"sticky"}
       top={0}
       left={0}
       zIndex={999}
       bg={"white"}
-      w={"auto"}
+      w={"100%"}
     >
       <Text
         fontSize={"25px"}

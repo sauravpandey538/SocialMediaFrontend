@@ -21,7 +21,13 @@ function NavItem() {
     { icon: IoSettings, name: "Setting" },
   ];
   return (
-    <Flex direction="column" gap="2" maxH={"fit-content"} zIndex={999}>
+    <Flex
+      direction="column"
+      gap="2"
+      maxH={"fit-content"}
+      zIndex={999}
+      overflowY={"auto"}
+    >
       {nav.map((item, index) => (
         <motion.div whileHover={{ scale: 1.1 }} key={index}>
           <Link
