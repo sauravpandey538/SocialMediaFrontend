@@ -38,7 +38,7 @@ function MiddleNav({ device }) {
       position={"sticky"}
       top={0}
       left={0}
-      zIndex={999}
+      zIndex={800} // zindex for comment is 900
       bg={"white"}
       w={"100%"}
     >
@@ -64,6 +64,8 @@ function MiddleNav({ device }) {
             flexDirection: "column",
             gap: "3",
             padding: "10px 0px",
+            boxShadow: "rgba(0,0,0,0.3) 0px 4px 12px ",
+            zIndex: "800", // it will be considered later
           }}
         >
           <Text

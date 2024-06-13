@@ -44,7 +44,7 @@ function CommentButton({ postId }) {
     fetch();
   }, [comment]);
   return (
-    <Box>
+    <Flex>
       <Button
         leftIcon={<BiSolidCommentDetail />}
         onClick={() => setClicked(!clicked)}
@@ -53,15 +53,16 @@ function CommentButton({ postId }) {
       </Button>
       {clicked && (
         <Box
-          h={"100%"}
-          w={"100%"}
+          h={"100vh"}
+          w={"100vw"}
           backgroundColor="rgba(0, 0, 0, 0.7)"
           display={"flex"}
           justifyContent={"center"}
           alignItems={"center"}
-          position={"absolute"}
+          position={"fixed"}
           top={0}
           left={0}
+          zIndex={900}
         >
           <Card
             h={"lg"}
@@ -80,11 +81,13 @@ function CommentButton({ postId }) {
               <MdCancel fontSize={"20px"} />
             </Flex>
             {/* middle one or comment array */}
-            <Box
-              display={"flex"}
+            <Flex
               flexDir={"column"}
               gap={5}
-              overflowY={"scroll"}
+              overflowY={"auto"}
+              alignItems={"flex-start"}
+              justifyContent={"start"}
+              h={"100%"}
             >
               {commentApi.map((item) => (
                 <Flex key={item._id} gap={3}>
@@ -101,7 +104,7 @@ function CommentButton({ postId }) {
                   </Text>
                 </Flex>
               ))}
-            </Box>
+            </Flex>
             <Flex gap={3}>
               <Input
                 placeholder={"what's your thought on it?"}
@@ -113,7 +116,7 @@ function CommentButton({ postId }) {
           </Card>
         </Box>
       )}
-    </Box>
+    </Flex>
   );
 }
 

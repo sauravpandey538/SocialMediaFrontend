@@ -5,16 +5,14 @@ import ProfileImageName from "../leftside/ProfileImageName";
 import Story from "../rightside/Story";
 import Suggestions from "../rightside/Suggestions";
 import Postmodel from "../models/post.model";
-import MiddleNav from "../middleside/MiddleNav";
-import Upload from "../middleside/upload";
+// import MiddleNav from "../middleside/MiddleNav";
+// import Upload from "../middleside/upload";
 import axios from "axios";
 import { useBreakpointValue } from "@chakra-ui/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "../Signup.jsx";
 import Login from "../Login.jsx";
-// import Logout from "../Logout.jsx";
-import ReactDOM from "react-dom/client";
-// import Profile from "../middleside/Profile";
+// import ReactDOM from "react-dom/client";
 import { UserContext } from "../context/userContext";
 import Profile from "../from_Nav/Profile";
 import Friends from "../from_Nav/Friends";
@@ -36,9 +34,9 @@ function App() {
             withCredentials: true,
           }
         );
-        console.log(userResponse);
+        // console.log(userResponse);
         updateUser(userResponse.data.user);
-        console.log(userResponse);
+        // console.log(userResponse);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -83,18 +81,22 @@ function App() {
           <Route
             path="/"
             element={
-              <Card
-                flex={2}
-                overflowY={"scroll"}
-                maxH={"100vh"}
-                // minW={"sm"}
-                // border={"2px solid black"}
-                overflowX={"hidden"}
-              >
-                <MiddleNav device={device} />
-                <Upload pp={user.profileImage} username={user.email} />
-                <Postmodel />
-              </Card>
+              // <Card
+              //   flex={2}
+              //   overflowY={"scroll"}
+              //   maxH={"100vh"}
+              //   // minW={"sm"}
+              //   // border={"2px solid black"}
+              //   overflowX={"hidden"}
+              // >
+              // {/* <MiddleNav device={device} /> */}
+              // {/* <Upload pp={user.profileImage} username={user.email} /> */}
+              <Postmodel
+                device={device}
+                pp={user.profileImage}
+                username={user.email}
+              />
+              // </Card>
             }
           />
           <Route path="/signup" element={<Signup />} />
@@ -132,3 +134,55 @@ function App() {
 }
 
 export default App;
+
+// import InfiniteScroll from "react-infinite-scroll-component";
+// import React, { useState } from "react";
+
+// function App() {
+//   const [dataSource, setDataSource] = useState(Array.from({ length: 5 }));
+//   const [hasMore, setHasMore] = useState(true);
+
+//   const fetchMoreData = () => {
+//     if (dataSource.length < 50) {
+//       // making api call
+//       setTimeout(() => {
+//         setDataSource(dataSource.concat(Array.from({ length: 5 })));
+//       }, 1000);
+//     } else {
+//       setHasMore(false);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <p>title : Infinite scroll tutorial</p>
+//       <div>
+//         <InfiniteScroll
+//           dataLength={dataSource.length}
+//           next={fetchMoreData}
+//           hasMore={hasMore}
+//           loader={<p>loading...</p>}
+//           endMessage={<p>You're set...</p>}
+//           height={500}
+//         >
+//           {dataSource.map((item, index) => {
+//             return (
+//               <div
+//                 style={{
+//                   height: "300px",
+//                   border: "2px solid black",
+//                   margin: "50px",
+//                 }}
+//               >
+//                 {" "}
+//                 This is div #{index + 1} inside infinite scroll
+//               </div>
+//             );
+//           })}
+//         </InfiniteScroll>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default App;

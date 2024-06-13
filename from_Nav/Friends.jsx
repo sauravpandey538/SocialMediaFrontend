@@ -16,10 +16,15 @@ import {
 import { Link, useParams } from "react-router-dom";
 import { Unfollow } from "../utilities/Follow";
 import MiddleNav from "../middleside/MiddleNav";
+
 function Friends({ userId }) {
   //   const { user } = useContext(UserContext);
   const id = useParams().userId;
   const [api, setApi] = useState([]);
+  //checking
+
+  const [clicked, setClicked] = useState(false); // this is working as expected
+
   const device = useBreakpointValue({
     base: "iphone",
     md: "ipad",
@@ -56,7 +61,6 @@ function Friends({ userId }) {
     };
     fetch();
   }, [handleRemove]);
-
   return (
     <Card
       w={"100%"}
@@ -95,7 +99,9 @@ function Friends({ userId }) {
                 {data.following.email}
               </Link>
             </Text>
-            <Unfollow userID={data.following._id} />
+            <Box onClick={() => setClicked(!clicked)}>
+              <Unfollow userID={data.following._id} />
+            </Box>
           </Flex>
         ))}
       </Flex>

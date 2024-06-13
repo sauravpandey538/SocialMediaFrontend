@@ -16,13 +16,16 @@ import { formatDistanceToNow } from "date-fns";
 import PostBottom from "../utilities/PostBottom";
 import { Link } from "react-router-dom";
 import MiddleNav from "../middleside/MiddleNav";
+import { FollowButton, Unfollow } from "../utilities/Follow";
 function Profile() {
   const { userId } = useParams();
   const [user, setUser] = useState({});
-  const [isFollowing, setIsFollowing] = useState(false);
+  // const [isFollowing, setIsFollowing] = useState(false);
   const [postCount, setPostCount] = useState(0);
   const [showPost, setShowPost] = useState(false);
   const [posts, setPosts] = useState([]);
+  const [isFollowing, setIsFollowing] = useState(null);
+  const [clicked, setClicked] = useState(false);
   const device = useBreakpointValue({
     base: "iphone",
     md: "ipad",
@@ -40,25 +43,27 @@ function Profile() {
         setUser(response.data.data);
         setPostCount(response.data.postCount);
         setPosts(response.data.posts);
+        setIsFollowing(response.data.isFollowing);
       } catch (error) {
         console.error("Error:", error);
       }
     };
 
     response();
-  }, [userId]);
+  }, [userId, clicked]);
+  console.log(isFollowing);
+
   return (
     <Card
-      p={"30px"}
       display={"flex"}
       flexDirection={"column"}
-      gap={5}
       w={"100%"}
       overflowY={"scroll"}
-      height={"100vh"}
+      maxH={"100vh"}
+      mx={"auto"}
     >
       {(device === "iphone" || device === "ipad") && <MiddleNav />}
-      <Box>
+      <Box p={"30px"} overflowX={"hidden"}>
         <ProfileImageName
           pp={user.profileImage}
           cp={user.coverImage}
@@ -74,13 +79,27 @@ function Profile() {
               <Text>{user.followingCount} following </Text>
             </Link>
           </Flex>
-          <Button>{isFollowing ? "Following" : "Follow"}</Button>
+          {/* <Button>{isFollowing ? "Following" : "Follow"}</Button> */}
+          {isFollowing !== undefined && (
+            <>
+              {isFollowing ? (
+                <Box onClick={() => setClicked(!clicked)}>
+                  {" "}
+                  <Unfollow userID={userId} />
+                </Box>
+              ) : (
+                <Box onClick={() => setClicked(!clicked)}>
+                  <FollowButton userId={userId} />
+                </Box>
+              )}
+            </>
+          )}
         </Flex>
         <Button onClick={() => setShowPost(!showPost)} minH={"40px"}>
           {showPost ? "Hide Post" : "Show Post"}
         </Button>
         {showPost && (
-          <div>
+          <Box>
             {posts?.map((post, index) => (
               <Card
                 key={index}
@@ -90,7 +109,7 @@ function Profile() {
                 bgSize="cover"
                 bgPosition="center"
                 my="20px"
-                p={"10px"}
+                p={"15px"}
               >
                 {/* 1st row */}
                 <Flex
@@ -146,11 +165,11 @@ function Profile() {
                   mt="10px"
                 >
                   {/* Add your like/comment buttons here */}
-                  <PostBottom />
+                  <PostBottom postId={post._id} />
                 </Flex>
               </Card>
             ))}
-          </div>
+          </Box>
         )}
       </Box>
     </Card>
