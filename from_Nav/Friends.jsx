@@ -23,8 +23,6 @@ function Friends({ userId }) {
   const [api, setApi] = useState([]);
   //checking
 
-  const [clicked, setClicked] = useState(false); // this is working as expected
-
   const device = useBreakpointValue({
     base: "iphone",
     md: "ipad",
@@ -99,9 +97,7 @@ function Friends({ userId }) {
                 {data.following.email}
               </Link>
             </Text>
-            <Box onClick={() => setClicked(!clicked)}>
-              <Unfollow userID={data.following._id} />
-            </Box>
+            <Unfollow userID={data.following._id} />
           </Flex>
         ))}
       </Flex>
