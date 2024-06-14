@@ -24,12 +24,20 @@ function NavItem() {
     <Flex
       direction="column"
       gap="2"
-      maxH={"fit-content"}
-      zIndex={999}
+      h={"max-content"}
+      zIndex={898}
       overflowY={"auto"}
+      overflowX={"hidden"}
+      bg={"white"}
+      // border={"2px solid black"}
+      py={"10px"}
     >
       {nav.map((item, index) => (
-        <motion.div whileHover={{ scale: 1.1 }} key={index}>
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          key={index}
+          // style={{ border: "2px solid black", overflow: "hidden" }}
+        >
           <Link
             to={
               item.name === "Home"

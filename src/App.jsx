@@ -17,6 +17,7 @@ import { UserContext } from "../context/userContext";
 import Profile from "../from_Nav/Profile";
 import Friends from "../from_Nav/Friends";
 import Setting from "../from_Nav/Setting";
+import MiddleNav from "../middleside/MiddleNav";
 
 function App() {
   const { user, updateUser } = useContext(UserContext);
@@ -103,6 +104,33 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/:userId/friends" element={<Friends />} />
+          {/* out of service*/}
+          <Route
+            path="/notification"
+            element={
+              <Flex direction={"column"} w={"100%"} zIndex={999}>
+                <MiddleNav />
+                <p>
+                  {" "}
+                  Opps!, <br />
+                  Notification is out of service at this moment
+                </p>
+              </Flex>
+            }
+          />
+          <Route
+            path="/message"
+            element={
+              <Flex direction={"column"} w={"100%"} zIndex={999}>
+                <MiddleNav />
+                <p>
+                  {" "}
+                  Opps!, <br />
+                  Message is out of service at this moment
+                </p>
+              </Flex>
+            }
+          />
           <Route path="/setting" element={<Setting />} />
           {/* <Route path="/" */}
         </Routes>

@@ -7,6 +7,7 @@ import { Button } from "@chakra-ui/react";
 function LikeButton({ postId }) {
   const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
+  // state to know of it is liked or not yet and then send props as a result
   const handleLike = async () => {
     try {
       const response = await axios.post(
@@ -41,7 +42,7 @@ function LikeButton({ postId }) {
     };
     fetchCounts();
   }, [like]);
-
+  // dont pass any prop, use conditional rendering to change icons dynamicaly...
   return (
     <Button onClick={handleLike} leftIcon={<CiHeart />}>
       {likeCount}

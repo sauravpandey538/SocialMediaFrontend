@@ -120,6 +120,7 @@ function Postmodel({ device, pp, username }) {
               mt="10px"
             >
               <PostBottom postId={post._id} />
+              {/* use prop and pass prop to its child component*/}
             </Flex>
           </Card>
         ))}
