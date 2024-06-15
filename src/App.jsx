@@ -8,7 +8,7 @@ import Postmodel from "../models/post.model";
 // import MiddleNav from "../middleside/MiddleNav";
 // import Upload from "../middleside/upload";
 import axios from "axios";
-import { useBreakpointValue } from "@chakra-ui/react";
+import { useBreakpointValue, Box } from "@chakra-ui/react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "../Signup.jsx";
 import Login from "../Login.jsx";
@@ -74,7 +74,7 @@ function App() {
               email={user.email}
               bio={user.bio}
             />
-            <NavItem />
+            <NavItem device={device} />
           </Card>
         )}
         {/* middle side */}
@@ -104,6 +104,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/:userId/friends" element={<Friends />} />
+          <Route
+            path="/stories"
+            element={<Story useFullScreen={true} device={device} />}
+          />
+          <Route path="/suggestion" element={<Suggestions device={device} />} />
+
           {/* out of service*/}
           <Route
             path="/notification"
@@ -149,7 +155,7 @@ function App() {
             <Heading fontSize={"25px"} fontWeight={700} color={"gray.700"}>
               Stories
             </Heading>
-            {Object.keys(user) !== 0 && <Story />}
+            {Object.keys(user) !== 0 && <Story device={device} />}
             <Text fontSize={"25px"} fontWeight={700} color={"gray.700"}>
               Suggestions{" "}
             </Text>{" "}

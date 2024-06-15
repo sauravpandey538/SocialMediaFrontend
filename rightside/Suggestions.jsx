@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import CustomizedButton from "../utilities/Button";
 import { FollowButton } from "../utilities/Follow";
-function Suggestions() {
+import MiddleNav from "../middleside/MiddleNav";
+function Suggestions({ device }) {
   const [api, setApi] = useState([]);
   const [count, setCount] = useState(5);
   const { user } = useContext(UserContext);
@@ -41,7 +42,11 @@ function Suggestions() {
       gap={4}
       flexDirection={"column"}
       overflowY={"auto"}
+      bg={"white"}
+      p={device && "10px"}
     >
+      {(device === "iphone" || device === "ipad") && <MiddleNav />}
+
       {api?.map((data, index) => (
         <Flex justifyContent={"left"} gap={3} alignItems={"end"} key={index}>
           {" "}
@@ -49,7 +54,7 @@ function Suggestions() {
           <Link to={`/profile/${data._id}`}>
             <Avatar name={data.email} src={data.profileImage} />{" "}
           </Link>
-          <Text w={"200px"} h={"auto"} minW={"100px"}>
+          <Text w={"400px"} h={"auto"} minW={"100px"}>
             <Link to={`/profile/${data._id}`}>{data.email}</Link>
           </Text>
           <FollowButton userId={data._id} />

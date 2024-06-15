@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card, Image, Flex, Text, Box, Avatar } from "@chakra-ui/react";
+import { Card, Image, Flex, Text, Box, Avatar, Button } from "@chakra-ui/react";
 import axios from "axios";
 import { UserContext } from "../context/userContext";
-function Story() {
-  const [api, setApi] = useState([]);
-  const [count, setCount] = useState(5);
-  const { user, updateUser } = useContext(UserContext);
+import { IoIosBackspace } from "react-icons/io";
 
+import { motion } from "framer-motion";
+import MiddleNav from "../middleside/MiddleNav";
+function Story({ useFullScreen, device }) {
+  const [api, setApi] = useState([]);
+  const [count, setCount] = useState(15);
+  const { user, updateUser } = useContext(UserContext);
+  const [isOpen, setIsOpen] = useState(false);
+  const [imgUrl, setImgUrl] = useState("");
   useEffect(() => {
     const postData = async () => {
       try {
@@ -25,74 +30,137 @@ function Story() {
 
     postData();
   }, [user]);
-  // console.log(api);
+  const setOpenImage = (url) => {
+    setIsOpen(!isOpen);
+    setImgUrl(url);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      // console.log("under processing");
+      const timer = setTimeout(() => {
+        setIsOpen(false);
+      }, 30000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [isOpen]);
+
+  // console.log(imgUrl);
   return (
     <Card>
-      {/* story
-        suggestions
-        friends */}
-      <Flex gap={2} bg={"white"} overflow={"scroll"}>
-        {api?.map((data, index) => (
-          <Box minW={"200px"} key={index} position={"relative"}>
-            <Image
-              h={"2xs"}
-              objectFit="cover"
-              src={data.storyImage}
-              borderRadius={"10px"}
-              filter="brightness(40%)"
-            />
-            <Avatar
-              src={data.uploaderPP}
+      {useFullScreen !== true && (
+        <Flex gap={2} bg={"white"} overflow={"scroll"}>
+          {api?.map((data, index) => (
+            <Box minW={"200px"} key={data._id} position={"relative"}>
+              <Image
+                h={"2xs"}
+                objectFit="cover"
+                src={data.storyImage}
+                borderRadius={"10px"}
+                filter="brightness(40%)"
+                onClick={() => setOpenImage(data.storyImage)}
+              />
+              <Avatar
+                src={data.uploaderPP}
+                position={"absolute"}
+                top={"10px"}
+                left={"15px"}
+                bg={"white"}
+              />
+            </Box>
+          ))}
+        </Flex>
+      )}
+      {useFullScreen === true && (
+        <>
+          {(device === "iphone" || device === "ipad") && <MiddleNav />}
+
+          <Flex
+            gap={2}
+            bg={"white"}
+            flexWrap={"wrap"}
+            px={"10px"}
+            maxH={"100vh"}
+            overflowY={"auto"}
+          >
+            {api?.map((data, index) => (
+              <Box
+                minW={"100px"}
+                maxW={"160px"}
+                key={data._id}
+                position={"relative"}
+                overflow={"auto"}
+              >
+                <Image
+                  h={"2xs"}
+                  objectFit="cover"
+                  src={data.storyImage}
+                  borderRadius={"10px"}
+                  filter="brightness(40%)"
+                  onClick={() => setOpenImage(data.storyImage)}
+                />
+                <Avatar
+                  src={data.uploaderPP}
+                  position={"absolute"}
+                  top={"10px"}
+                  left={"15px"}
+                  bg={"white"}
+                />
+              </Box>
+            ))}
+          </Flex>
+        </>
+      )}
+      {isOpen && (
+        <Box
+          h={"100vh"}
+          w={"100vw"}
+          position={"fixed"}
+          top={0}
+          left={0}
+          zIndex={999}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          backgroundColor="rgba(0, 0, 0, 0.7)"
+        >
+          <Box position={"relative"} flexDirection={"column"} mx={"20px"}>
+            <Button
+              onClick={() => setIsOpen(!isOpen)}
               position={"absolute"}
-              top={"10px"}
-              left={"15px"}
-              bg={"white"}
+              top={"50px"}
+              right={"50px"}
+              border={"50%"}
+              rightIcon={<IoIosBackspace />}
+            >
+              Back
+            </Button>
+
+            <Image
+              src={imgUrl}
+              h={"80vh"}
+              w={"auto"}
+              objectFit={"cover"}
+              borderRadius={"10px"}
+              mb={"5px"}
+            />
+            <motion.div
+              initial={{ width: "0%" }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 30 }}
+              style={{
+                height: "5px",
+                backgroundColor: "white",
+                borderRadius: "10px",
+              }}
             />
           </Box>
-        ))}
-      </Flex>
+        </Box>
+      )}
     </Card>
   );
 }
 export default Story;
-// "story": {
-//   "uploader": "hello2@gmail.com",
-//   "uploaderPP": "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png",
-//   "storyImage": "http://res.cloudinary.com/ddqif698j/image/upload/v1717256830/ajlkfklmlz8icqc3zatu.jpg",
-//   "_id": "665b427f8a1017dafab45ae7",
-//   "createdAt": "2024-06-01T15:47:11.380Z",
-//   "__v": 0
-// }
-// }
-// const api = [
-//   {
-//     email: "Saurav0325@gmail.com",
-//     image:
-//       "https://m.economictimes.com/thumb/msid-103914319,width-1600,height-900,resizemode-4,imgsize-74464/demon-slayer-season-5-heres-everything-we-about-the-series-so-far.jpg",
-//   },
-//   {
-//     email: "hello8848@gmail.com",
-//     image:
-//       "https://demonslayer-hinokami.sega.com/img/purchase/digital-standard.jpg",
-//   },
-//   {
-//     email: "johndoe@gmail.com",
-//     image:
-//       "https://sportshub.cbsistatic.com/i/2024/02/03/1a44be06-ff8d-4849-98e4-4177178ca139/demon-slayer-hashira-training-arc-movie-tickets-buy-sale.jpg",
-//   },
-//   {
-//     email: "Saurav0325@gmail.com",
-//     image:
-//       "https://m.economictimes.com/thumb/msid-103914319,width-1600,height-900,resizemode-4,imgsize-74464/demon-slayer-season-5-heres-everything-we-about-the-series-so-far.jpg",
-//   },
-//   {
-//     email: "hello8848@gmail.com",
-//     image:
-//       "https://demonslayer-hinokami.sega.com/img/purchase/digital-standard.jpg",
-//   },
-//   {
-//     email: "johndoe@gmail.com",
-//     image:
-//       "https://sportshub.cbsistatic.com/i/2024/02/03/1a44be06-ff8d-4849-98e4-4177178ca139/demon-slayer-hashira-training-arc-movie-tickets-buy-sale.jpg",
-//   },
-// ];
