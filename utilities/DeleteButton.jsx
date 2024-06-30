@@ -17,9 +17,12 @@ import axios from "axios";
 // Function to handle deleting posts
 async function deletePosts() {
   try {
-    const response = await axios.delete("http://localhost:3000/delete/posts", {
-      withCredentials: true,
-    }); // Adjust the URL as needed
+    const response = await axios.delete(
+      "https://socialmediabackend-uwpt.onrender.com/delete/posts",
+      {
+        withCredentials: true,
+      }
+    ); // Adjust the URL as needed
     console.log("Posts deleted:", response.data);
   } catch (error) {
     console.error("Error deleting posts:", error);
@@ -30,7 +33,7 @@ async function deletePosts() {
 async function deleteAccount() {
   try {
     const response = await axios.delete(
-      "http://localhost:3000/delete/account",
+      "https://socialmediabackend-uwpt.onrender.com/delete/account",
       { withCredentials: true }
     ); // Adjust the URL as needed
     console.log("Account deleted:", response.data);

@@ -19,7 +19,10 @@ function Signup() {
   };
   const handleSubmit = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/signup", form);
+      const response = await axios.post(
+        "https://socialmediabackend-uwpt.onrender.com/signup",
+        form
+      );
       navigate("/login");
     } catch (error) {
       console.log(error);

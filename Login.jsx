@@ -21,9 +21,13 @@ function Login() {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/login", form, {
-        withCredentials: true, // Include cookies
-      });
+      const response = await axios.post(
+        "https://socialmediabackend-uwpt.onrender.com/login",
+        form,
+        {
+          withCredentials: true, // Include cookies
+        }
+      );
       navigate("/");
       updateUser(response.data.user);
     } catch (error) {

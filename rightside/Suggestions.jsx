@@ -20,7 +20,7 @@ function Suggestions({ device }) {
     const postData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/suggestions/${count}`,
+          `https://socialmediabackend-uwpt.onrender.com/suggestions/${count}`,
           {
             withCredentials: true,
           }

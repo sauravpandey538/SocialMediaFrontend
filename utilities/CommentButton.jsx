@@ -12,7 +12,7 @@ function CommentButton({ postId }) {
     if (comment && comment !== "") {
       try {
         const response = await axios.post(
-          `http://localhost:3000/${postId}/comment`,
+          `https://socialmediabackend-uwpt.onrender.com/${postId}/comment`,
           { comment },
           {
             withCredentials: true,
@@ -29,7 +29,7 @@ function CommentButton({ postId }) {
     const fetch = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/${postId}/comments`,
+          `https://socialmediabackend-uwpt.onrender.com/${postId}/comments`,
 
           {
             withCredentials: true,

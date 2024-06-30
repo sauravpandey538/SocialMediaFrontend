@@ -12,7 +12,7 @@
 //     const fetchCounts = async () => {
 //       try {
 //         const response = await axios.get(
-//           `http://localhost:3000/post/${postId}`,
+//           `https://socialmediabackend-uwpt.onrender.com/post/${postId}`,
 //           {
 //             withCredentials: true,
 //           }
@@ -47,7 +47,7 @@
 //     try {
 //       if (like === false) {
 //         const response = await axios.post(
-//           `http://localhost:3000/${postId}/like`,
+//           `https://socialmediabackend-uwpt.onrender.com/${postId}/like`,
 //           {},
 //           {
 //             withCredentials: true,
@@ -69,7 +69,7 @@
 //   const handleComment = async () => {
 //     try {
 //       const response = await axios.post(
-//         `http://localhost:3000/${postId}/comment`,
+//         `https://socialmediabackend-uwpt.onrender.com/${postId}/comment`,
 //         { comment },
 //         {
 //           withCredentials: true,

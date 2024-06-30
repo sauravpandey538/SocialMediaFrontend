@@ -32,7 +32,7 @@ function Upload({ pp, username }) {
       setLoadingUpload(true);
 
       const response = await axios.post(
-        "http://localhost:3000/upload/post",
+        "https://socialmediabackend-uwpt.onrender.com/upload/post",
         post,
         {
           withCredentials: true,
@@ -54,7 +54,7 @@ function Upload({ pp, username }) {
     try {
       setLoadingStory(true);
       const response = await axios.post(
-        "http://localhost:3000/upload/story",
+        "https://socialmediabackend-uwpt.onrender.com/upload/story",
         post,
         {
           withCredentials: true,

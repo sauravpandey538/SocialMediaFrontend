@@ -30,7 +30,7 @@ function App() {
     const fetchUserData = async () => {
       try {
         const userResponse = await axios.get(
-          "http://localhost:3000/myprofile",
+          "https://socialmediabackend-uwpt.onrender.com/myprofile",
           {
             withCredentials: true,
           }

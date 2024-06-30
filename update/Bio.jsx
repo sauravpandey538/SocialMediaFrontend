@@ -13,7 +13,7 @@ function Bio() {
     try {
       setLoadingUpload(true);
       const response = await axios.post(
-        "http://localhost:3000/bio",
+        "https://socialmediabackend-uwpt.onrender.com/bio",
         { bio },
         {
           withCredentials: true,

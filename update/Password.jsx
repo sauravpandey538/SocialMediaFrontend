@@ -13,7 +13,7 @@ function Password() {
   const handleUpdate = async () => {
     try {
       const response = await axios.patch(
-        "http://localhost:3000/update/password",
+        "https://socialmediabackend-uwpt.onrender.com/update/password",
         { oldpassword, newpassword },
         {
           withCredentials: true,

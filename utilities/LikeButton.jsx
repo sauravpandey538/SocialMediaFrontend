@@ -11,7 +11,7 @@ function LikeButton({ postId }) {
   const handleLike = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/${postId}/like`,
+        `https://socialmediabackend-uwpt.onrender.com/${postId}/like`,
         {},
         {
           withCredentials: true,
@@ -28,7 +28,7 @@ function LikeButton({ postId }) {
     const fetchCounts = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/post/${postId}`,
+          `https://socialmediabackend-uwpt.onrender.com/post/${postId}`,
           {
             withCredentials: true,
           }

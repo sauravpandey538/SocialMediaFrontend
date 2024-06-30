@@ -16,9 +16,12 @@ function Postmodel({ device, pp, username }) {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/posts`, {
-          params: { page, limit },
-        });
+        const response = await axios.get(
+          `https://socialmediabackend-uwpt.onrender.com/posts`,
+          {
+            params: { page, limit },
+          }
+        );
         const { data } = response;
         const fetchedPosts = data.posts;
         const totalPosts = data.totalPosts;

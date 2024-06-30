@@ -35,7 +35,7 @@ function Profile() {
     const response = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/${userId}/profile`,
+          `https://socialmediabackend-uwpt.onrender.com/${userId}/profile`,
           {
             withCredentials: true,
           }

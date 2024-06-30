@@ -31,7 +31,7 @@ function Friends({ userId }) {
   const handleRemove = async (userId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/suggestion/${userId}/delete`,
+        `https://socialmediabackend-uwpt.onrender.com/suggestion/${userId}/delete`,
         {
           withCredentials: true,
         }
@@ -47,7 +47,7 @@ function Friends({ userId }) {
     const fetch = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/${id}/followings`,
+          `https://socialmediabackend-uwpt.onrender.com/${id}/followings`,
           {
             withCredentials: true,
           }

@@ -9,7 +9,7 @@ function Email() {
   const handleUpdate = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/bio",
+        "https://socialmediabackend-uwpt.onrender.com/bio",
         { email },
         {
           withCredentials: true,

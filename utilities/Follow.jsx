@@ -9,7 +9,7 @@ export function FollowButton({ userId }) {
   const handleFollow = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/${userId}/follow`,
+        `https://socialmediabackend-uwpt.onrender.com/${userId}/follow`,
         {},
         {
           withCredentials: true,
@@ -31,7 +31,7 @@ export function Unfollow({ userID }) {
   const handleRemove = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/suggestion/${userID}/delete`,
+        `https://socialmediabackend-uwpt.onrender.com/suggestion/${userID}/delete`,
         {
           withCredentials: true,
         }

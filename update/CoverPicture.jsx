@@ -19,7 +19,7 @@ function CoverPicture() {
     try {
       setLoadingUpload(true);
       const response = await axios.post(
-        "http://localhost:3000/coverimage",
+        "https://socialmediabackend-uwpt.onrender.com/coverimage",
         { image },
         {
           withCredentials: true,

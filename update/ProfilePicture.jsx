@@ -19,7 +19,7 @@ function ProfilePicture() {
     try {
       setLoadingUpload(true);
       const response = await axios.post(
-        "http://localhost:3000/profileimage",
+        "https://socialmediabackend-uwpt.onrender.com/profileimage",
         { image },
         {
           withCredentials: true,

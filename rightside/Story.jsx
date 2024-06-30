@@ -16,7 +16,7 @@ function Story({ useFullScreen, device }) {
     const postData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/story/${count}`,
+          `https://socialmediabackend-uwpt.onrender.com/story/${count}`,
           {
             withCredentials: true,
           }

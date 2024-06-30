@@ -18,7 +18,7 @@ function MiddleNav({ device }) {
   const handleApiLogout = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/logout",
+        "https://socialmediabackend-uwpt.onrender.com/logout",
         {},
         {
           withCredentials: true,
