@@ -18,7 +18,7 @@ function LikeButton({ postId }) {
         }
       );
       setLike(!like);
-      // console.log(response);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
