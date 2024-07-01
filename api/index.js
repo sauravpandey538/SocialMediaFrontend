@@ -89,7 +89,8 @@ router.post("/login", async (req, res) => {
         secure: true, 
         // sameSite:'None',
         // path:'/',
-        domain:'https://social-media-frontend-sage.vercel.app'
+        domain:'https://social-media-frontend-sage.vercel.app',
+        maxAge: 1000 * 60 * 60 *24 *30*12, // would expire after 1 year
       };
   
       res
