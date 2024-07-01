@@ -88,7 +88,7 @@ router.post("/login", async (req, res) => {
         httpOnly: true,
         secure: true, 
         // sameSite:'None',
-        path:'/',
+        // path:'/',
         domain:'https://social-media-frontend-sage.vercel.app'
       };
   
