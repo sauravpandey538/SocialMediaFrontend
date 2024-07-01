@@ -29,12 +29,9 @@ function App() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const userResponse = await axios.get(
-          "https://social-media-backend-mocha.vercel.app/myprofile",
-          {
-            withCredentials: true,
-          }
-        );
+        const userResponse = await axios.get("/api/myprofile", {
+          withCredentials: true,
+        });
         // console.log(userResponse);
         updateUser(userResponse.data.user);
         // console.log(userResponse);

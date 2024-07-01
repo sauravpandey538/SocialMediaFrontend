@@ -12,7 +12,7 @@
 //     const fetchCounts = async () => {
 //       try {
 //         const response = await axios.get(
-//           `https://social-media-backend-mocha.vercel.app/post/${postId}`,
+//           `/api/post/${postId}`,
 //           {
 //             withCredentials: true,
 //           }
@@ -47,7 +47,7 @@
 //     try {
 //       if (like === false) {
 //         const response = await axios.post(
-//           `https://social-media-backend-mocha.vercel.app/${postId}/like`,
+//           `/api/${postId}/like`,
 //           {},
 //           {
 //             withCredentials: true,
@@ -69,7 +69,7 @@
 //   const handleComment = async () => {
 //     try {
 //       const response = await axios.post(
-//         `https://social-media-backend-mocha.vercel.app/${postId}/comment`,
+//         `/api/${postId}/comment`,
 //         { comment },
 //         {
 //           withCredentials: true,

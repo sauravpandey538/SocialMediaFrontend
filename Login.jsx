@@ -21,13 +21,9 @@ function Login() {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post(
-        "https://social-media-backend-mocha.vercel.app/login",
-        form,
-        {
-          withCredentials: true, // Include cookies
-        }
-      );
+      const response = await axios.post("/api/login", form, {
+        withCredentials: true, // Include cookies
+      });
       navigate("/");
       updateUser(response.data.user);
     } catch (error) {

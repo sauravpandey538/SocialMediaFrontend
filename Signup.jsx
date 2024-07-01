@@ -19,10 +19,7 @@ function Signup() {
   };
   const handleSubmit = async () => {
     try {
-      const response = await axios.post(
-        "https://social-media-backend-mocha.vercel.app/signup",
-        form
-      );
+      const response = await axios.post("/api/signup", form);
       navigate("/login");
     } catch (error) {
       console.log(error);

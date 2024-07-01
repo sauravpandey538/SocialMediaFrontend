@@ -34,12 +34,9 @@ function Profile() {
   useEffect(() => {
     const response = async () => {
       try {
-        const response = await axios.get(
-          `https://social-media-backend-mocha.vercel.app/${userId}/profile`,
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axios.get(`/api/${userId}/profile`, {
+          withCredentials: true,
+        });
         setUser(response.data.data);
         setPostCount(response.data.postCount);
         setPosts(response.data.posts);

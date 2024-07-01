@@ -36,14 +36,16 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./uploads'));
+const router = express.Router()
+
 // app.use(bodyParser.json());
 //  app.use(bodyParser.urlencoded({ extended: true }));
 
 //hello
 // Define a route handler for the default home page
-app.get('/', (req, res) => {res.send('Hello, Express 3.0!');
+router.get('/', (req, res) => {res.send('Hello, Express 3.0!');
 });
-app.post('/signup', validateSignup ,async(req,res)=>{
+router.post('/signup', validateSignup ,async(req,res)=>{
     const {email,password} = req.body;
     if(!(email && password)){
         return res.status(400).json({message:"Provide both email and password"})
@@ -59,7 +61,7 @@ app.post('/signup', validateSignup ,async(req,res)=>{
     }
 
 })  // working
-app.post("/login", async (req, res) => {
+router.post("/login", async (req, res) => {
     const { email, password } = req.body;
   
     if (!(email && password)) {
@@ -100,7 +102,7 @@ app.post("/login", async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
     }
 }); // working
-app.post('/logout', verifyJWT, async (req, res) => {
+router.post('/logout', verifyJWT, async (req, res) => {
   try {
     res.clearCookie('accessToken');
     res.clearCookie('refreshToken');
@@ -111,7 +113,7 @@ app.post('/logout', verifyJWT, async (req, res) => {
   }
 });
   // working
-  app.post('/bio', verifyJWT, async (req, res) => {
+  router.post('/bio', verifyJWT, async (req, res) => {
     const { bio } = req.body;
   
     if (bio === "") {
@@ -136,7 +138,7 @@ app.post('/logout', verifyJWT, async (req, res) => {
   }); // working in json only
   
     // working  // accepting only json body...
-app.post('/profileimage',verifyJWT, upload.single('image'), async (req, res) => {
+router.post('/profileimage',verifyJWT, upload.single('image'), async (req, res) => {
     try {
         // Find the user by ID (assuming you're using some form of authentication middleware)
         const user = await User.findById(req.user.id);
@@ -157,7 +159,7 @@ user.profileImage = cloudinaryResult.url;
         return res.status(500).json({ error: "Internal server error" });
     }
 }); // working
-app.post('/coverimage',verifyJWT, upload.single('image'), async (req, res) => {
+router.post('/coverimage',verifyJWT, upload.single('image'), async (req, res) => {
   try {
       // Find the user by ID (assuming you're using some form of authentication middleware)
       const user = await User.findById(req.user.id);
@@ -178,7 +180,7 @@ user.coverImage = cloudinaryResult.url;
       return res.status(500).json({ error: "Internal server error" });
   }
 }); // working
-app.get('/myprofile', verifyJWT, async(req,res)=>{
+router.get('/myprofile', verifyJWT, async(req,res)=>{
 try {
   const user = await User.findById(req.user.id);
   return res.status(200).json({user})
@@ -186,7 +188,7 @@ try {
   return res.status(400).json({message:"user couldn't find", error})
 }
 }) // working
-app.get('/:userId/profile', verifyJWT, async (req, res) => {
+router.get('/:userId/profile', verifyJWT, async (req, res) => {
   try {
       let { userId } = req.params;
   
@@ -286,7 +288,7 @@ else{
       return res.status(500).json({ message: "Internal server error", error });
   }
 }); // working
-app.patch('/update/password',verifyJWT, async(req,res)=>{
+router.patch('/update/password',verifyJWT, async(req,res)=>{
   const {newpassword,oldpassword} = req.body;
   if(newpassword === "") {
     return res.status(400).json({message:"Enter your new password correctly "})
@@ -309,7 +311,7 @@ try {
 }) // working
 
 // about post
-app.post('/upload/post', verifyJWT, upload.single('image'), async (req, res) => {
+router.post('/upload/post', verifyJWT, upload.single('image'), async (req, res) => {
   try {
     const { caption } = req.body;
     const imageUrl = await uploadCloudinary(req.file?.path);
@@ -339,7 +341,7 @@ app.post('/upload/post', verifyJWT, upload.single('image'), async (req, res) => 
   }
 });
 
-app.get("/post/:postId", async(req,res)=>{
+router.get("/post/:postId", async(req,res)=>{
   try {
     const {postId}= req.params;
     const post = await Post.findById(postId)
@@ -356,7 +358,7 @@ app.get("/post/:postId", async(req,res)=>{
 
 
  // working  // checked with image and caption
-app.delete('/post/:id',verifyJWT,async(req,res)=>{
+router.delete('/post/:id',verifyJWT,async(req,res)=>{
 try {
   const postId = req.params.id;
   const postUpoader = await Post.findById(postId);
@@ -370,7 +372,7 @@ try {
   return res.status(400).json({message:"internal server error"})
 }
 }) // working
-app.get('/posts', async (req, res) => {
+router.get('/posts', async (req, res) => {
   const { page = 1, limit = 2 } = req.query; // Default to page 1 and limit 2 posts per page
   try {
     const posts = await Post.find({})
@@ -389,7 +391,7 @@ app.get('/posts', async (req, res) => {
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 }); // working
-app.get('/:userId/posts',async(req,res)=>{
+router.get('/:userId/posts',async(req,res)=>{
   const {userId} = req.params;
   const isUserExist  = await User.findById(userId);
   if(!isUserExist) {
@@ -402,7 +404,7 @@ try {
   return res.status(400).json({error})
 }
 }) // working
-app.post('/:user/follow',verifyJWT, async(req,res)=>{
+router.post('/:user/follow',verifyJWT, async(req,res)=>{
 
   try {
     const followingId = req.params.user;
@@ -422,7 +424,7 @@ app.post('/:user/follow',verifyJWT, async(req,res)=>{
     return res.status(400).json({message:"internal server error", error})
   }
 }); // working
- app.get('/suggestions/:count',verifyJWT, async(req,res)=>{
+ router.get('/suggestions/:count',verifyJWT, async(req,res)=>{
   
   const count  = parseInt(req.params.count) || 5;
   try {
@@ -434,7 +436,7 @@ app.post('/:user/follow',verifyJWT, async(req,res)=>{
     return res.status(400).json({message: "internal server error", error})
   }
  });  // working
- app.post('/upload/story', verifyJWT, upload.single('image'), async(req,res)=>{
+ router.post('/upload/story', verifyJWT, upload.single('image'), async(req,res)=>{
   try {
     const imageUrl = await uploadCloudinary(req.file?.path)
     // Fetch the user object using the user ID
@@ -459,12 +461,12 @@ app.post('/:user/follow',verifyJWT, async(req,res)=>{
     return res.status(400).json({message:"internal server error", error})
   }
   })
-  app.get('/story/:count',verifyJWT, async(req,res)=>{
+  router.get('/story/:count',verifyJWT, async(req,res)=>{
     const count  = parseInt(req.params.count) || 9;
     const fetchUser = await Story.find().limit(count).sort({ createdAt: -1 });
     return res.status(200).json({suggestions:fetchUser})
    });
-app.get("/:userId/followings", async(req,res)=>{
+router.get("/:userId/followings", async(req,res)=>{
   const {userId} = req.params;
   const user = await User.findById(userId);
   if(!user){ return res.status(404).json({ message:"User is not registered yet"})}
@@ -476,7 +478,7 @@ app.get("/:userId/followings", async(req,res)=>{
   }
 })
 
-app.delete("/delete/posts", verifyJWT, async(req,res)=>{
+router.delete("/delete/posts", verifyJWT, async(req,res)=>{
 const user = await User.findById(req.user.id)
 if(!user){
   return res.status(404).json({message:"invalid user access"})
@@ -488,7 +490,7 @@ try {
   return res.status(401).json({message:"Error during deleting posts"})
 }
 })
-app.delete("/delete/account", verifyJWT, async(req,res)=>{
+router.delete("/delete/account", verifyJWT, async(req,res)=>{
   const user = await User.findById(req.user.id)
   if(!user){
     return res.status(404).json({message:"invalid user access"})
@@ -500,7 +502,7 @@ app.delete("/delete/account", verifyJWT, async(req,res)=>{
     return res.status(401).json({message:"Error during deleting user"})
   }
   })
-  app.delete("/suggestion/:userId/delete", verifyJWT, async (req, res) => {
+  router.delete("/suggestion/:userId/delete", verifyJWT, async (req, res) => {
     const { userId } = req.params;
   
     try {
@@ -520,7 +522,7 @@ app.delete("/delete/account", verifyJWT, async(req,res)=>{
       return res.status(500).json({ message: "Internal server error",error });
     }
   });
-app.post("/:postId/like", verifyJWT, async(req,res)=>{
+router.post("/:postId/like", verifyJWT, async(req,res)=>{
 const {postId} = req.params;
 const isValid = await Post.findById(postId);
 if (!isValid){
@@ -548,7 +550,7 @@ try {
   return res.status(400).json({message:"Internal error", error})
 }
 }) // working as expected
-app.post("/:postId/comment", verifyJWT, async(req,res)=>{
+router.post("/:postId/comment", verifyJWT, async(req,res)=>{
   const {postId} = req.params;
   const {comment}= req.body;
   if (comment === " "){
@@ -571,7 +573,7 @@ try {
   return res.status(400).json({message:"Internal server error", error})
 }
 }) // working as expected
-app.delete("/:commentId/undocomment", verifyJWT, async(req,res)=>{
+router.delete("/:commentId/undocomment", verifyJWT, async(req,res)=>{
   const {commentId} = req.params;
   const verifiedId = await Comment.findById(commentId);
   if(!verifiedId){
@@ -584,7 +586,7 @@ app.delete("/:commentId/undocomment", verifyJWT, async(req,res)=>{
     return res.status(400).json({message:"Internal server error"})
   }
 }) // working as expected
-app.get("/:postId/likes", verifyJWT, async(req,res)=>{
+router.get("/:postId/likes", verifyJWT, async(req,res)=>{
   const {postId} = req.params;
   const validPost = await Post.findById(postId);
   if(!validPost){
@@ -595,7 +597,7 @@ app.get("/:postId/likes", verifyJWT, async(req,res)=>{
   return res.status(200).json({message:"Likes fetched sucessfully", likesList})
   // isliked : true || false , problem solved...
 }) // working as expected
-app.get("/:postId/comments",  async(req,res)=>{
+router.get("/:postId/comments",  async(req,res)=>{
   const {postId} = req.params;
   const validPost = await Post.findById(postId);
   if(!validPost){
@@ -606,13 +608,7 @@ app.get("/:postId/comments",  async(req,res)=>{
   return res.status(200).json({message:"comments fetched sucessfully", comments})
 }) // working as expected
 
-
-
-
-
-
-
-
+app.use('/api',router)
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

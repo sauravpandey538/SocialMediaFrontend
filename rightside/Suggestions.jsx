@@ -19,12 +19,9 @@ function Suggestions({ device }) {
   useEffect(() => {
     const postData = async () => {
       try {
-        const response = await axios.get(
-          `https://social-media-backend-mocha.vercel.app/suggestions/${count}`,
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axios.get(`/api/suggestions/${count}`, {
+          withCredentials: true,
+        });
         setApi(response.data.suggestions);
       } catch (error) {
         console.error("Error:", error);

@@ -19,7 +19,7 @@ function CoverPicture() {
     try {
       setLoadingUpload(true);
       const response = await axios.post(
-        "https://social-media-backend-mocha.vercel.app/coverimage",
+        "/api/coverimage",
         { image },
         {
           withCredentials: true,

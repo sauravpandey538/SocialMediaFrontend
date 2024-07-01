@@ -16,12 +16,9 @@ function Postmodel({ device, pp, username }) {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(
-          `https://social-media-backend-mocha.vercel.app/posts`,
-          {
-            params: { page, limit },
-          }
-        );
+        const response = await axios.get(`/api/posts`, {
+          params: { page, limit },
+        });
         const { data } = response;
         const fetchedPosts = data.posts;
         const totalPosts = data.totalPosts;

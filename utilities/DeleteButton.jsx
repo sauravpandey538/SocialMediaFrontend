@@ -17,12 +17,9 @@ import axios from "axios";
 // Function to handle deleting posts
 async function deletePosts() {
   try {
-    const response = await axios.delete(
-      "https://social-media-backend-mocha.vercel.app/delete/posts",
-      {
-        withCredentials: true,
-      }
-    ); // Adjust the URL as needed
+    const response = await axios.delete("/api/delete/posts", {
+      withCredentials: true,
+    }); // Adjust the URL as needed
     console.log("Posts deleted:", response.data);
   } catch (error) {
     console.error("Error deleting posts:", error);
@@ -32,10 +29,9 @@ async function deletePosts() {
 // Function to handle deleting account
 async function deleteAccount() {
   try {
-    const response = await axios.delete(
-      "https://social-media-backend-mocha.vercel.app/delete/account",
-      { withCredentials: true }
-    ); // Adjust the URL as needed
+    const response = await axios.delete("/api/delete/account", {
+      withCredentials: true,
+    }); // Adjust the URL as needed
     console.log("Account deleted:", response.data);
   } catch (error) {
     console.error("Error deleting account:", error);

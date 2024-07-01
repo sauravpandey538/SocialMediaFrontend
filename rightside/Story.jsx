@@ -15,12 +15,9 @@ function Story({ useFullScreen, device }) {
   useEffect(() => {
     const postData = async () => {
       try {
-        const response = await axios.get(
-          `https://social-media-backend-mocha.vercel.app/story/${count}`,
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axios.get(`/api/story/${count}`, {
+          withCredentials: true,
+        });
         setApi(response.data.suggestions);
       } catch (error) {
         console.error("Error:", error);

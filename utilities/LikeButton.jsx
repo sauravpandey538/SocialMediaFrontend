@@ -11,7 +11,7 @@ function LikeButton({ postId }) {
   const handleLike = async () => {
     try {
       const response = await axios.post(
-        `https://social-media-backend-mocha.vercel.app/${postId}/like`,
+        `/api/${postId}/like`,
         {},
         {
           withCredentials: true,
@@ -27,12 +27,9 @@ function LikeButton({ postId }) {
     // Fetch initial counts
     const fetchCounts = async () => {
       try {
-        const response = await axios.get(
-          `https://social-media-backend-mocha.vercel.app/post/${postId}`,
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axios.get(`/api/post/${postId}`, {
+          withCredentials: true,
+        });
 
         // console.log(response);
         setLikeCount(response.data.post.likeCount);

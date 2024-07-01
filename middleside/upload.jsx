@@ -31,16 +31,12 @@ function Upload({ pp, username }) {
     try {
       setLoadingUpload(true);
 
-      const response = await axios.post(
-        "https://social-media-backend-mocha.vercel.app/upload/post",
-        post,
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post("/api/upload/post", post, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       setLoadingUpload(false);
 
       window.location.reload(); // this is unfair and will be removed later
@@ -53,16 +49,12 @@ function Upload({ pp, username }) {
   const handleStory = async () => {
     try {
       setLoadingStory(true);
-      const response = await axios.post(
-        "https://social-media-backend-mocha.vercel.app/upload/story",
-        post,
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post("/api/upload/story", post, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       setLoadingStory(false);
       window.location.reload(); // this is unfair and will be removed later
     } catch (error) {

@@ -9,7 +9,7 @@ function Email() {
   const handleUpdate = async () => {
     try {
       const response = await axios.post(
-        "https://social-media-backend-mocha.vercel.app/bio",
+        "/api/bio",
         { email },
         {
           withCredentials: true,

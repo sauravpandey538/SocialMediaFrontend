@@ -13,7 +13,7 @@ function Password() {
   const handleUpdate = async () => {
     try {
       const response = await axios.patch(
-        "https://social-media-backend-mocha.vercel.app/update/password",
+        "/api/update/password",
         { oldpassword, newpassword },
         {
           withCredentials: true,

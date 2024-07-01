@@ -30,12 +30,9 @@ function Friends({ userId }) {
   });
   const handleRemove = async (userId) => {
     try {
-      const response = await axios.delete(
-        `https://social-media-backend-mocha.vercel.app/suggestion/${userId}/delete`,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.delete(`/api/suggestion/${userId}/delete`, {
+        withCredentials: true,
+      });
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -46,12 +43,9 @@ function Friends({ userId }) {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const response = await axios.get(
-          `https://social-media-backend-mocha.vercel.app/${id}/followings`,
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axios.get(`/api/${id}/followings`, {
+          withCredentials: true,
+        });
         setApi(response.data.followingList);
       } catch (error) {
         console.log(error);

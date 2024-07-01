@@ -13,7 +13,7 @@ function Bio() {
     try {
       setLoadingUpload(true);
       const response = await axios.post(
-        "https://social-media-backend-mocha.vercel.app/bio",
+        "/api/bio",
         { bio },
         {
           withCredentials: true,
