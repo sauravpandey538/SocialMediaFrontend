@@ -9,7 +9,7 @@ function Email() {
   const handleUpdate = async () => {
     try {
       const response = await axios.post(
-        "https://socialmediabackend-uwpt.onrender.com/bio",
+        "https://social-media-backend-mocha.vercel.app/bio",
         { email },
         {
           withCredentials: true,

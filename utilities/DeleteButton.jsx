@@ -18,7 +18,7 @@ import axios from "axios";
 async function deletePosts() {
   try {
     const response = await axios.delete(
-      "https://socialmediabackend-uwpt.onrender.com/delete/posts",
+      "https://social-media-backend-mocha.vercel.app/delete/posts",
       {
         withCredentials: true,
       }
@@ -33,7 +33,7 @@ async function deletePosts() {
 async function deleteAccount() {
   try {
     const response = await axios.delete(
-      "https://socialmediabackend-uwpt.onrender.com/delete/account",
+      "https://social-media-backend-mocha.vercel.app/delete/account",
       { withCredentials: true }
     ); // Adjust the URL as needed
     console.log("Account deleted:", response.data);

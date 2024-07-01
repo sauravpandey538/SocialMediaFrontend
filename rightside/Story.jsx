@@ -16,7 +16,7 @@ function Story({ useFullScreen, device }) {
     const postData = async () => {
       try {
         const response = await axios.get(
-          `https://socialmediabackend-uwpt.onrender.com/story/${count}`,
+          `https://social-media-backend-mocha.vercel.app/story/${count}`,
           {
             withCredentials: true,
           }

@@ -22,7 +22,7 @@ function Login() {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        "https://socialmediabackend-uwpt.onrender.com/login",
+        "https://social-media-backend-mocha.vercel.app/login",
         form,
         {
           withCredentials: true, // Include cookies

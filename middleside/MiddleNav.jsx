@@ -18,7 +18,7 @@ function MiddleNav({ device }) {
   const handleApiLogout = async () => {
     try {
       const response = await axios.post(
-        "https://socialmediabackend-uwpt.onrender.com/logout",
+        "https://social-media-backend-mocha.vercel.app/logout",
         {},
         {
           withCredentials: true,

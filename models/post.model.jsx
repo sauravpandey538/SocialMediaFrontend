@@ -17,7 +17,7 @@ function Postmodel({ device, pp, username }) {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          `https://socialmediabackend-uwpt.onrender.com/posts`,
+          `https://social-media-backend-mocha.vercel.app/posts`,
           {
             params: { page, limit },
           }

@@ -19,7 +19,7 @@ function ProfilePicture() {
     try {
       setLoadingUpload(true);
       const response = await axios.post(
-        "https://socialmediabackend-uwpt.onrender.com/profileimage",
+        "https://social-media-backend-mocha.vercel.app/profileimage",
         { image },
         {
           withCredentials: true,

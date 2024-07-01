@@ -12,7 +12,7 @@ function CommentButton({ postId }) {
     if (comment && comment !== "") {
       try {
         const response = await axios.post(
-          `https://socialmediabackend-uwpt.onrender.com/${postId}/comment`,
+          `https://social-media-backend-mocha.vercel.app/${postId}/comment`,
           { comment },
           {
             withCredentials: true,
@@ -29,7 +29,7 @@ function CommentButton({ postId }) {
     const fetch = async () => {
       try {
         const response = await axios.get(
-          `https://socialmediabackend-uwpt.onrender.com/${postId}/comments`,
+          `https://social-media-backend-mocha.vercel.app/${postId}/comments`,
 
           {
             withCredentials: true,

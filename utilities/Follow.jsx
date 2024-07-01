@@ -9,7 +9,7 @@ export function FollowButton({ userId }) {
   const handleFollow = async () => {
     try {
       const response = await axios.post(
-        `https://socialmediabackend-uwpt.onrender.com/${userId}/follow`,
+        `https://social-media-backend-mocha.vercel.app/${userId}/follow`,
         {},
         {
           withCredentials: true,
@@ -31,7 +31,7 @@ export function Unfollow({ userID }) {
   const handleRemove = async () => {
     try {
       const response = await axios.delete(
-        `https://socialmediabackend-uwpt.onrender.com/suggestion/${userID}/delete`,
+        `https://social-media-backend-mocha.vercel.app/suggestion/${userID}/delete`,
         {
           withCredentials: true,
         }

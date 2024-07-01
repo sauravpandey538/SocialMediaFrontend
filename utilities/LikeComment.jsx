@@ -12,7 +12,7 @@
 //     const fetchCounts = async () => {
 //       try {
 //         const response = await axios.get(
-//           `https://socialmediabackend-uwpt.onrender.com/post/${postId}`,
+//           `https://social-media-backend-mocha.vercel.app/post/${postId}`,
 //           {
 //             withCredentials: true,
 //           }
@@ -47,7 +47,7 @@
 //     try {
 //       if (like === false) {
 //         const response = await axios.post(
-//           `https://socialmediabackend-uwpt.onrender.com/${postId}/like`,
+//           `https://social-media-backend-mocha.vercel.app/${postId}/like`,
 //           {},
 //           {
 //             withCredentials: true,
@@ -69,7 +69,7 @@
 //   const handleComment = async () => {
 //     try {
 //       const response = await axios.post(
-//         `https://socialmediabackend-uwpt.onrender.com/${postId}/comment`,
+//         `https://social-media-backend-mocha.vercel.app/${postId}/comment`,
 //         { comment },
 //         {
 //           withCredentials: true,

@@ -19,7 +19,7 @@ function CoverPicture() {
     try {
       setLoadingUpload(true);
       const response = await axios.post(
-        "https://socialmediabackend-uwpt.onrender.com/coverimage",
+        "https://social-media-backend-mocha.vercel.app/coverimage",
         { image },
         {
           withCredentials: true,

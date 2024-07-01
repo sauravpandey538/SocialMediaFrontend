@@ -31,7 +31,7 @@ function Friends({ userId }) {
   const handleRemove = async (userId) => {
     try {
       const response = await axios.delete(
-        `https://socialmediabackend-uwpt.onrender.com/suggestion/${userId}/delete`,
+        `https://social-media-backend-mocha.vercel.app/suggestion/${userId}/delete`,
         {
           withCredentials: true,
         }
@@ -47,7 +47,7 @@ function Friends({ userId }) {
     const fetch = async () => {
       try {
         const response = await axios.get(
-          `https://socialmediabackend-uwpt.onrender.com/${id}/followings`,
+          `https://social-media-backend-mocha.vercel.app/${id}/followings`,
           {
             withCredentials: true,
           }

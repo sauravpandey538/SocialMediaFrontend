@@ -20,7 +20,7 @@ function Signup() {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        "https://socialmediabackend-uwpt.onrender.com/signup",
+        "https://social-media-backend-mocha.vercel.app/signup",
         form
       );
       navigate("/login");

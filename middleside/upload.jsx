@@ -32,7 +32,7 @@ function Upload({ pp, username }) {
       setLoadingUpload(true);
 
       const response = await axios.post(
-        "https://socialmediabackend-uwpt.onrender.com/upload/post",
+        "https://social-media-backend-mocha.vercel.app/upload/post",
         post,
         {
           withCredentials: true,
@@ -54,7 +54,7 @@ function Upload({ pp, username }) {
     try {
       setLoadingStory(true);
       const response = await axios.post(
-        "https://socialmediabackend-uwpt.onrender.com/upload/story",
+        "https://social-media-backend-mocha.vercel.app/upload/story",
         post,
         {
           withCredentials: true,

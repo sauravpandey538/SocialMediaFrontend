@@ -20,7 +20,7 @@ function Suggestions({ device }) {
     const postData = async () => {
       try {
         const response = await axios.get(
-          `https://socialmediabackend-uwpt.onrender.com/suggestions/${count}`,
+          `https://social-media-backend-mocha.vercel.app/suggestions/${count}`,
           {
             withCredentials: true,
           }
