@@ -1,10 +1,6 @@
-import multer from "multer";
-// import fs from "fs"
-const uploadDir = 'uploads';
+import multer from 'multer';
 
-// if (!fs.existsSync(uploadDir)) {
-//     fs.mkdirSync(uploadDir, { recursive: true });
-// }
+const uploadDir = '/tmp'; // Use /tmp for temporary storage in Vercel
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
